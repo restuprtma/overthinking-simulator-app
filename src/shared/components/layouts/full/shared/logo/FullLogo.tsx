@@ -1,4 +1,4 @@
-import LogoLakukan from '/src/assets/images/logos/logo-lakukan-full.png';
+import LogoLakukan from '/src/assets/images/logos/logo.png';
 import { Link } from 'react-router';
 
 const FullLogo = () => {

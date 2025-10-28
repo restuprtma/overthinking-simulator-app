@@ -1,10 +1,10 @@
 export interface ChildItem {
   id?: number | string;
   name?: string;
-  icon?: any;
+  icon?: string;
   children?: ChildItem[];
-  item?: any;
-  url?: any;
+  item?: unknown;
+  url?: string;
   color?: string;
   permission?: string;
 }
@@ -12,12 +12,12 @@ export interface ChildItem {
 export interface MenuItem {
   heading?: string;
   name?: string;
-  icon?: any;
+  icon?: string;
   id?: number;
   to?: string;
   items?: MenuItem[];
   children?: ChildItem[];
-  url?: any;
+  url?: string;
   permission?: string;
 }
 
@@ -28,58 +28,6 @@ import { PERMISSIONS } from '@/app/constants/permission';
 const SidebarContent: MenuItem[] = [
   {
     id: 1,
-    name: "CRM",
-    items: [
-      {
-        heading: "CRM",
-        children: [
-          {
-            name: "Dashboard",
-            icon: "solar:widget-line-duotone",
-            id: uniqueId(),
-            url: ROUTES.CRM.DASHBOARD,
-          },
-          {
-            name: "Chats",
-            icon: "solar:chat-round-line-line-duotone",
-            id: uniqueId(),
-            url: ROUTES.CRM.CHATS,
-          },
-          {
-            name: "Leads",
-            icon: "solar:user-speak-rounded-line-duotone",
-            id: uniqueId(),
-            url: ROUTES.CRM.LEADS,
-          },
-          {
-            name: "Deals",
-            icon: "solar:hand-shake-line-duotone",
-            id: uniqueId(),
-            url: ROUTES.CRM.DEALS,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Reports",
-    items: [
-      {
-        heading: "Reports",
-        children: [
-          {
-            name: "Revenue vs Target",
-            icon: "solar:graph-up-line-duotone",
-            id: uniqueId(),
-            url: ROUTES.CRM.REPORTS.REVENUE_VS_TARGET,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 3,
     name: "Core",
     items: [
       {

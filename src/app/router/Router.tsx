@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { lazy } from 'react';
 import { Navigate, createBrowserRouter } from 'react-router';
 import Loadable from '@/shared/components/layouts/full/shared/loadable/Loadable';
@@ -92,31 +90,6 @@ const SamplePage = Loadable(
   lazy(() => import('@/modules/common/sample-page').then((m) => ({ default: m.SamplePage }))),
 );
 
-// CRM Module - Dashboard (separate chunk)
-const DashboardPage = Loadable(
-  lazy(() => import('@/modules/crm/dashboard').then((m) => ({ default: m.DashboardPage }))),
-);
-
-// CRM Module - Chat History (separate chunk)
-const ChatHistoryPage = Loadable(
-  lazy(() => import('@/modules/crm/chats').then((m) => ({ default: m.ChatHistoryPage }))),
-);
-
-// CRM Module - Leads (separate chunk)
-const LeadsPage = Loadable(
-  lazy(() => import('@/modules/crm/leads').then((m) => ({ default: m.LeadsPage }))),
-);
-
-// CRM Module - Deals (separate chunk)
-const DealsPage = Loadable(
-  lazy(() => import('@/modules/crm/deals').then((m) => ({ default: m.DealsPage }))),
-);
-
-// CRM Module - Revenue Report (separate chunk)
-const RevenueReportPage = Loadable(
-  lazy(() => import('@/modules/crm/reports').then((m) => ({ default: m.RevenueReportPage }))),
-);
-
 // Common Module - Error Pages (separate chunk)
 const ForbiddenPage = Loadable(
   lazy(() => import('@/modules/common/errors').then((m) => ({ default: m.ForbiddenPage }))),
@@ -166,11 +139,6 @@ const Router = [
     children: [
       { index: true, element: <SamplePage /> },
       { path: 'sample-page', element: <SamplePage /> },
-      { path: 'dashboard', element: <DashboardPage /> },
-      { path: 'chats', element: <ChatHistoryPage /> },
-      { path: 'leads', element: <LeadsPage /> },
-      { path: 'deals', element: <DealsPage /> },
-      { path: 'reports/revenue-vs-target', element: <RevenueReportPage /> },
       {
         path: 'users',
         element: (

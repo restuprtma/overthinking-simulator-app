@@ -13,9 +13,9 @@ export const IconSidebar = () => {
     useContext(CustomizerContext) || {};
 
   // Handle icon click
-  const handleClick = (id: any) => {
-    setSelectedIconId(id);
-    setIsCollapse("full-sidebar");
+  const handleClick = (id: number) => {
+    setSelectedIconId?.(id);
+    setIsCollapse?.("full-sidebar");
   };
 
   return (
@@ -27,9 +27,9 @@ export const IconSidebar = () => {
             className="nav-link"
             onClick={() => {
               if (isCollapse === "full-sidebar") {
-                setIsCollapse("mini-sidebar");
+                setIsCollapse?.("mini-sidebar");
               } else {
-                setIsCollapse("full-sidebar");
+                setIsCollapse?.("full-sidebar");
               }
             }}
           >

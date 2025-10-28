@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import React from 'react';
 import { Card, CardContent, Typography, Box, Button } from '@venturo/react-ui';
 
 const SamplePage = () => {

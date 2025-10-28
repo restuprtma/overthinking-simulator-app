@@ -7,7 +7,7 @@ import { ROUTES } from '../constants/router';
  * HTTP client with automatic token injection, refresh logic, and 401 handling
  */
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   data: T;
   message?: string;
   status?: number;
@@ -55,7 +55,7 @@ class ApiService {
                                      originalRequest.url?.includes('/auth/switch-company');
 
           if (isCompanyEndpoint) {
-            console.warn('401 on company endpoint - component will handle error');
+            // Let component handle company endpoint errors
             return Promise.reject(error);
           }
 
@@ -92,7 +92,7 @@ class ApiService {
   }
 
   /** GET request with automatic query param filtering */
-  async get<T = any>(url: string, params: Record<string, any> = {}): Promise<AxiosResponse<T>> {
+  async get<T = unknown>(url: string, params: Record<string, unknown> | object = {}): Promise<AxiosResponse<T>> {
     const queryParams = Object.fromEntries(
       Object.entries(params).filter(
         ([_, value]) => value !== undefined && value !== null && value !== '',
@@ -103,14 +103,14 @@ class ApiService {
   }
 
   /** POST request with JSON body */
-  async post<T = any>(url: string, payloads: any = {}): Promise<AxiosResponse<T>> {
+  async post<T = unknown>(url: string, payloads: unknown = {}): Promise<AxiosResponse<T>> {
     return this.api.post<T>(this.buildUrl(url), payloads);
   }
 
   /** POST with URL-encoded form data */
-  async postForm<T = any>(
+  async postForm<T = unknown>(
     url: string,
-    payloads: Record<string, any> = {},
+    payloads: Record<string, unknown> | object = {},
   ): Promise<AxiosResponse<T>> {
     const formData = new URLSearchParams();
 
@@ -128,17 +128,17 @@ class ApiService {
   }
 
   /** PUT request with JSON body */
-  async put<T = any>(url: string, payloads: any = {}): Promise<AxiosResponse<T>> {
+  async put<T = unknown>(url: string, payloads: unknown = {}): Promise<AxiosResponse<T>> {
     return this.api.put<T>(this.buildUrl(url), payloads);
   }
 
   /** PATCH request with JSON body */
-  async patch<T = any>(url: string, payloads: any = {}): Promise<AxiosResponse<T>> {
+  async patch<T = unknown>(url: string, payloads: unknown = {}): Promise<AxiosResponse<T>> {
     return this.api.patch<T>(this.buildUrl(url), payloads);
   }
 
   /** DELETE request */
-  async delete<T = any>(url: string): Promise<AxiosResponse<T>> {
+  async delete<T = unknown>(url: string): Promise<AxiosResponse<T>> {
     return this.api.delete<T>(this.buildUrl(url));
   }
 }

@@ -18,7 +18,7 @@ const NotFoundPage = () => (
       <Button
         color="primary"
         as={Link}
-        to={ROUTES.DASHBOARD}
+        to={ROUTES.ROOT}
         className="w-fit mt-6 mx-auto"
       >
         Go Back to Home

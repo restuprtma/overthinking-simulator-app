@@ -23,53 +23,6 @@ interface TopbarMenuItem {
 const Menuitems: TopbarMenuItem[] = [
   {
     id: uniqueId(),
-    title: 'Dashboard',
-    icon: 'solar:widget-line-duotone',
-    href: ROUTES.CRM.DASHBOARD,
-    column: 1,
-    children: [],
-  },
-  {
-    id: uniqueId(),
-    title: 'Chats',
-    icon: 'solar:chat-round-line-line-duotone',
-    href: ROUTES.CRM.CHATS,
-    column: 1,
-    children: [],
-  },
-  {
-    id: uniqueId(),
-    title: 'Leads',
-    icon: 'solar:user-speak-rounded-line-duotone',
-    href: ROUTES.CRM.LEADS,
-    column: 1,
-    children: [],
-  },
-  {
-    id: uniqueId(),
-    title: 'Deals',
-    icon: 'solar:hand-shake-line-duotone',
-    href: ROUTES.CRM.DEALS,
-    column: 1,
-    children: [],
-  },
-  {
-    id: uniqueId(),
-    title: 'Reports',
-    icon: 'solar:chart-2-line-duotone',
-    href: '',
-    column: 1,
-    children: [
-      {
-        id: uniqueId(),
-        title: 'Revenue vs Target',
-        icon: 'solar:graph-up-line-duotone',
-        href: ROUTES.CRM.REPORTS.REVENUE_VS_TARGET,
-      },
-    ],
-  },
-  {
-    id: uniqueId(),
     title: 'Core',
     icon: 'solar:database-line-duotone',
     href: '',

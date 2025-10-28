@@ -8,10 +8,6 @@ export const ROUTES = {
   ROOT: '/',
   ROOT_PUBLIC: '/auth',
 
-  // Dashboard
-  DASHBOARD: '/dashboard',
-  SAMPLE_PAGE: '/sample-page',
-
   // User Management
   USERS: '/users',
   ROLES: '/roles',
@@ -24,17 +20,6 @@ export const ROUTES = {
     MODULES: '/modules',
     PERMISSION_TEMPLATES: '/permission-templates',
     COMPANIES: '/companies',
-  },
-
-  // CRM Routes
-  CRM: {
-    DASHBOARD: '/dashboard',
-    CHATS: '/chats',
-    LEADS: '/leads',
-    DEALS: '/deals',
-    REPORTS: {
-      REVENUE_VS_TARGET: '/reports/revenue-vs-target',
-    },
   },
 
   // Auth Routes

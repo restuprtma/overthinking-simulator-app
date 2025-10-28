@@ -33,7 +33,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     enabled: !!user,
     onTimeout: () => {
       setUser(null);
-      console.log('Session timed out, user logged out');
     },
   });
 
@@ -52,16 +51,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     const handleAuthTokenChange = (event: CustomEvent) => {
       const { token } = event.detail;
-      console.log('Auth token changed event detected (same-tab)');
 
       if (token) {
         // Extract user from token
         const userData = authService.getUser();
         setUser(userData);
-        console.log('User authenticated via custom event');
       } else {
         setUser(null);
-        console.log('User logged out via custom event');
       }
     };
 
@@ -77,19 +73,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const handleStorageChange = (event: StorageEvent) => {
       // Only react to token changes from other tabs
       if (event.key === 'access_token') {
-        console.log('Storage event detected (cross-tab), token changed:', event.newValue ? 'added/updated' : 'removed');
-
         if (event.newValue) {
           // Token added - user logged in in another tab
           const userData = authService.getUser();
           if (userData) {
             setUser(userData);
-            console.log('User authenticated via storage event (cross-tab)');
           }
         } else {
           // Token removed - user logged out in another tab
           setUser(null);
-          console.log('User logged out via storage event (cross-tab)');
         }
       }
     };
@@ -116,7 +108,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const userData = authService.getUser();
       setUser(userData);
     } catch (error) {
-      console.error('Login error:', error);
       throw error;
     }
   };
@@ -125,13 +116,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
    * Logout user
    */
   const logout = async () => {
-    try {
-      // Clear auth data
-      authService.clearAuth();
-      setUser(null);
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
+    // Clear auth data
+    authService.clearAuth();
+    setUser(null);
   };
 
   /**
@@ -142,7 +129,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     try {
       await refetchProfile();
     } catch (error) {
-      console.error('Refresh user error:', error);
       // If refresh fails, clear auth
       authService.clearAuth();
       setUser(null);

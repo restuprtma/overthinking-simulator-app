@@ -35,7 +35,9 @@ export const authService = {
       const decoded = jwtDecode<DecodedToken>(token);
       storageService.set(TOKEN_EXPIRY_KEY, decoded.exp * 1000); // Convert to milliseconds
     } catch (error) {
-      console.error('Failed to decode token:', error);
+      // Token decode failed, clear and return
+      authService.clearAuth();
+      return;
     }
 
     // Update last activity
@@ -73,7 +75,6 @@ export const authService = {
       // Add 5 second buffer to prevent edge cases
       return currentTime >= expiryTime - 5000;
     } catch (error) {
-      console.error('Error checking token expiration:', error);
       return true;
     }
   },
@@ -112,13 +113,12 @@ export const authService = {
         company_name: decoded.company_name,
         email: decoded.email,
         username: decoded.username,
-        full_name: decoded.full_name, // Use username as fallback for full_name
+        full_name: decoded.full_name,
         is_active: true,
         is_email_verified: true,
         last_login_at: null,
       };
     } catch (error) {
-      console.error('Failed to decode user from token:', error);
       return null;
     }
   },
@@ -134,7 +134,6 @@ export const authService = {
       const decoded = jwtDecode<DecodedToken>(token);
       return decoded.roles || [];
     } catch (error) {
-      console.error('Failed to get roles from token:', error);
       return [];
     }
   },
@@ -148,10 +147,8 @@ export const authService = {
 
     try {
       const decoded = jwtDecode<DecodedToken>(token);
-      // console.log('Decoded permissions:', decoded.permissions);
       return decoded.permissions || [];
     } catch (error) {
-      console.error('Failed to get permissions from token:', error);
       return [];
     }
   },
@@ -163,8 +160,6 @@ export const authService = {
   setAuthData: async (token: string): Promise<void> => {
     return new Promise((resolve, reject) => {
       try {
-        console.log('Setting auth data with synchronization...');
-
         // Store only token (user data will be extracted from token)
         authService.setToken(token);
 
@@ -174,8 +169,6 @@ export const authService = {
         if (!storedToken) {
           throw new Error('Failed to store authentication token');
         }
-
-        console.log('Auth token stored successfully, triggering state sync...');
 
         // Dispatch custom event untuk same-tab sync
         window.dispatchEvent(
@@ -195,11 +188,9 @@ export const authService = {
 
         // Beri waktu untuk React batch updates
         setTimeout(() => {
-          console.log('Auth data synchronization complete');
           resolve();
         }, 50);
       } catch (error) {
-        console.error('Error setting auth data:', error);
         reject(error);
       }
     });

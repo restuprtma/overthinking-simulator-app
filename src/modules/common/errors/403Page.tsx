@@ -24,7 +24,7 @@ const ForbiddenPage = () => (
       <Button
         color="primary"
         as={Link}
-        to={ROUTES.DASHBOARD}
+        to={ROUTES.ROOT}
         className="w-fit mx-auto"
       >
         Go Back to Home
