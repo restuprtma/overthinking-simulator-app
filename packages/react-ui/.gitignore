@@ -1,0 +1,19 @@
+# Build output
+dist/
+*.tgz
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Backup
+*.backup
