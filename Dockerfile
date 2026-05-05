@@ -1,41 +1,33 @@
-# Multi-stage build untuk optimasi ukuran image
+# syntax=docker/dockerfile:1.7
 
-# Stage 1: Build stage
-FROM node:20-alpine AS builder
-
-# Set working directory
+# ───── Stage 1: Build ─────
+FROM node:22-alpine AS build
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Manifest first — lets Docker reuse the install layer when only source changes
+COPY package.json yarn.lock ./
 
-# Copy workspace packages
-COPY packages ./packages
+# BuildKit cache mount keeps the yarn cache across builds
+RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
+    yarn install --frozen-lockfile --network-timeout 300000
 
-# Install dependencies
-RUN npm ci --legacy-peer-deps
-
-# Copy source code
 COPY . .
 
-# Note: .env file should be created by Jenkins before build with:
+# Vite inlines env at build time — .env.prod is the source of truth for prod
 COPY .env.prod .env
-# The .env file will be automatically copied and used by Vite during build
 
-# Build the application
-RUN npm run build
+RUN yarn build
 
-# Stage 2: Production stage
-FROM nginx:alpine
+# ───── Stage 2: Serve ─────
+FROM nginx:1.27-alpine AS runtime
 
-# Copy built files from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copy custom nginx config untuk SPA routing
-COPY deployment/nginx.conf /etc/nginx/conf.d/default.conf
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget -qO- http://127.0.0.1/ >/dev/null 2>&1 || exit 1
 
-# Expose port 80
 EXPOSE 80
 
-# Start nginx
 CMD ["nginx", "-g", "daemon off;"]

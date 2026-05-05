@@ -1,19 +1,36 @@
+import path from 'path';
+import checker from 'vite-plugin-checker';
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
-import svgr from '@svgr/rollup';
+import react from '@vitejs/plugin-react-swc';
 
-// https://vitejs.dev/config/
+// ----------------------------------------------------------------------
+
+const PORT = 8081;
+
 export default defineConfig({
-    resolve: {
-        alias: {
-            '@/app': resolve(__dirname, 'src/app'),
-            '@/api': resolve(__dirname, 'src/app/api'),
-            '@/modules': resolve(__dirname, 'src/modules'),
-            '@/shared': resolve(__dirname, 'src/shared'),
-            '@/assets': resolve(__dirname, 'src/assets'),
-            src: resolve(__dirname, 'src'),
-        },
-    },
-    plugins: [svgr(), react()],
+  plugins: [
+    react(),
+    checker({
+      typescript: true,
+      eslint: {
+        useFlatConfig: true,
+        lintCommand: 'eslint "./src/**/*.{js,jsx,ts,tsx}"',
+        dev: { logLevel: ['error'] },
+      },
+      overlay: {
+        position: 'tl',
+        initialIsOpen: false,
+      },
+    }),
+  ],
+  resolve: {
+    alias: [
+      {
+        find: /^src(.+)/,
+        replacement: path.resolve(process.cwd(), 'src/$1'),
+      },
+    ],
+  },
+  server: { port: PORT, host: true },
+  preview: { port: PORT, host: true },
 });

@@ -1,0 +1,10 @@
+{
+  "home": "Beranda",
+  "settings": {
+    "root": "Pengaturan",
+    "branches": "Cabang",
+    "roles": "Roles",
+    "users": "Pengguna",
+    "translationOverride": "Kustomisasi Istilah"
+  }
+}

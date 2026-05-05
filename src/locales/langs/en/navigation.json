@@ -1,0 +1,10 @@
+{
+  "home": "Home",
+  "settings": {
+    "root": "Settings",
+    "branches": "Branches",
+    "roles": "Roles",
+    "users": "Users",
+    "translationOverride": "Term Customization"
+  }
+}
