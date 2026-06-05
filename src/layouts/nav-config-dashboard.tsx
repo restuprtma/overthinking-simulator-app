@@ -18,6 +18,9 @@ const icon = (name: string) => (
 
 const ICONS = {
   home: icon('ic-dashboard'),
+  finance: icon('ic-banking'),
+  monitoring: icon('ic-analytics'),
+  sales: icon('ic-ecommerce'),
 };
 
 // ----------------------------------------------------------------------
@@ -73,6 +76,21 @@ export function useNavData(): NavSectionProps['data'] {
             title: t('home'),
             path: paths.dashboard.root,
             icon: ICONS.home,
+          },
+          {
+            title: t('dashboards.finance'),
+            path: paths.dashboard.dashboards.finance,
+            icon: ICONS.finance,
+          },
+          {
+            title: t('dashboards.monitoring'),
+            path: paths.dashboard.dashboards.monitoring,
+            icon: ICONS.monitoring,
+          },
+          {
+            title: t('dashboards.sales'),
+            path: paths.dashboard.dashboards.sales,
+            icon: ICONS.sales,
           },
         ],
       },

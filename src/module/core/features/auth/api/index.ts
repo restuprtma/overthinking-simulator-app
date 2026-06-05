@@ -1,9 +1,9 @@
 import type {
   TokenPair,
   MeResponse,
+  ApiEnvelope,
   SignInParams,
   SignUpParams,
-  ApiEnvelope,
   SignInResponse,
   SignUpResponse,
   CompanyMembership,

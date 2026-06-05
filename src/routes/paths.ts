@@ -12,6 +12,11 @@ export const paths = {
   },
   dashboard: {
     root: '/',
+    dashboards: {
+      finance: '/dashboards/finance',
+      monitoring: '/dashboards/monitoring',
+      sales: '/dashboards/sales',
+    },
     settings: {
       branches: '/settings/branches',
       roles: '/settings/roles',

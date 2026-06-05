@@ -90,38 +90,26 @@ export function JwtSignInView() {
         slotProps={{ inputLabel: { shrink: true } }}
       />
 
-      <Box sx={{ gap: 1.5, display: 'flex', flexDirection: 'column' }}>
-        <Link
-          component={RouterLink}
-          href="#"
-          variant="body2"
-          color="inherit"
-          sx={{ alignSelf: 'flex-end' }}
-        >
-          {t('signIn.forgotPassword')}
-        </Link>
-
-        <Field.Text
-          name="password"
-          label={t('signIn.fields.password')}
-          placeholder={t('signIn.fields.passwordPlaceholder')}
-          type={showPassword.value ? 'text' : 'password'}
-          slotProps={{
-            inputLabel: { shrink: true },
-            input: {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={showPassword.onToggle} edge="end">
-                    <Iconify
-                      icon={showPassword.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'}
-                    />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            },
-          }}
-        />
-      </Box>
+      <Field.Text
+        name="password"
+        label={t('signIn.fields.password')}
+        placeholder={t('signIn.fields.passwordPlaceholder')}
+        type={showPassword.value ? 'text' : 'password'}
+        slotProps={{
+          inputLabel: { shrink: true },
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={showPassword.onToggle} edge="end">
+                  <Iconify
+                    icon={showPassword.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'}
+                  />
+                </IconButton>
+              </InputAdornment>
+            ),
+          },
+        }}
+      />
 
       <Button
         fullWidth
