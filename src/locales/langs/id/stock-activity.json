@@ -1,0 +1,47 @@
+{
+  "title": "Aktivitas Saham",
+  "subtitle": "Aktivitas broker pada satu saham per tanggal — lihat siapa yang mengakumulasi dan siapa yang mendistribusi.",
+  "filter": {
+    "stock": "Saham",
+    "searchStock": "Cari saham…",
+    "date": "Tanggal"
+  },
+  "summary": {
+    "last": "Last",
+    "open": "Open",
+    "high": "High",
+    "low": "Low",
+    "prev": "Prev",
+    "volume": "Volume",
+    "value": "Value",
+    "freq": "Freq",
+    "foreignNet": "Asing Net"
+  },
+  "table": {
+    "topBuyers": "Top Net Buyers",
+    "topSellers": "Top Net Sellers",
+    "code": "Broker",
+    "bLot": "B.Lot",
+    "sLot": "S.Lot",
+    "bVal": "B.Val",
+    "sVal": "S.Val",
+    "bAvg": "B.Avg",
+    "sAvg": "S.Avg",
+    "empty": "Tidak ada data."
+  },
+  "chart": {
+    "netFlow": "Aliran Net Broker",
+    "netVal": "Net Value",
+    "top": "Top {{n}}"
+  },
+  "action": {
+    "accumulation": "Akumulasi",
+    "distribution": "Distribusi"
+  },
+  "breakdown": {
+    "title": "Komposisi Pelaku",
+    "foreign": "Asing",
+    "domestic": "Lokal",
+    "bumn": "BUMN"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "title": "Stock Activity",
+  "subtitle": "Broker-level activity for a single stock on a given date — see who is accumulating and who is distributing.",
+  "filter": {
+    "stock": "Stock",
+    "searchStock": "Search stocks…",
+    "date": "Date"
+  },
+  "summary": {
+    "last": "Last",
+    "open": "Open",
+    "high": "High",
+    "low": "Low",
+    "prev": "Prev",
+    "volume": "Volume",
+    "value": "Value",
+    "freq": "Freq",
+    "foreignNet": "Foreign Net"
+  },
+  "table": {
+    "topBuyers": "Top Net Buyers",
+    "topSellers": "Top Net Sellers",
+    "code": "Broker",
+    "bLot": "B.Lot",
+    "sLot": "S.Lot",
+    "bVal": "B.Val",
+    "sVal": "S.Val",
+    "bAvg": "B.Avg",
+    "sAvg": "S.Avg",
+    "empty": "No data."
+  },
+  "chart": {
+    "netFlow": "Broker Net Flow",
+    "netVal": "Net Value",
+    "top": "Top {{n}}"
+  },
+  "action": {
+    "accumulation": "Accumulation",
+    "distribution": "Distribution"
+  },
+  "breakdown": {
+    "title": "Participant Mix",
+    "foreign": "Foreign",
+    "domestic": "Local",
+    "bumn": "BUMN"
+  }
+}

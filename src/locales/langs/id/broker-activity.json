@@ -1,0 +1,51 @@
+{
+  "title": "Aktivitas Broker",
+  "subtitle": "Aktivitas satu broker pada semua saham per tanggal — lihat saham mana yang diakumulasi dan didistribusi.",
+  "filter": {
+    "broker": "Broker",
+    "searchBroker": "Cari broker…",
+    "date": "Tanggal"
+  },
+  "type": {
+    "foreign": "Asing",
+    "domestic": "Lokal",
+    "bumn": "BUMN"
+  },
+  "style": {
+    "accumulator": "Accumulator",
+    "distributor": "Distributor",
+    "rotator": "Rotator",
+    "scalper": "Scalper"
+  },
+  "summary": {
+    "totalVal": "Total Value",
+    "buyVal": "Buy Value",
+    "sellVal": "Sell Value",
+    "netVal": "Net Value",
+    "bsRatio": "B/S Ratio",
+    "stocks": "Saham Tersentuh",
+    "concentration": "Top 5 %",
+    "style": "Gaya"
+  },
+  "table": {
+    "topBought": "Top Net Buy Saham",
+    "topSold": "Top Net Sell Saham",
+    "stock": "Saham",
+    "bLot": "B.Lot",
+    "sLot": "S.Lot",
+    "bVal": "B.Val",
+    "sVal": "S.Val",
+    "bAvg": "B.Avg",
+    "sAvg": "S.Avg",
+    "net": "Net",
+    "empty": "Tidak ada data."
+  },
+  "chart": {
+    "netFlow": "Net Flow per Saham",
+    "netVal": "Net Value",
+    "top": "Top {{n}}"
+  },
+  "sector": {
+    "title": "Komposisi Sektor"
+  }
+}
