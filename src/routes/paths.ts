@@ -11,16 +11,6 @@ export const paths = {
   },
   dashboard: {
     root: '/',
-    sectorComponent: '/sector-component',
-    orderbook: '/orderbook',
-    orderbookPlayback: '/orderbook-playback',
-    orderbookAnalysis: '/orderbook-analysis',
-    tradebookAnalysis: '/tradebook-analysis',
-    brokerAnalysis: {
-      root: '/broker-analysis',
-      brokerActivity: '/broker-analysis/broker-activity',
-      stockActivity: '/broker-analysis/stock-activity',
-    },
     settings: {
       branches: '/settings/branches',
       roles: '/settings/roles',

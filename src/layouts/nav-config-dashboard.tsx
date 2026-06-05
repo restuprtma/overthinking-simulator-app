@@ -7,6 +7,7 @@ import { paths } from 'src/routes/paths';
 
 import { useTranslate } from 'src/locales';
 import { CONFIG } from 'src/shared/config';
+import { PERM } from 'src/shared/lib/permissions';
 import { SvgColor } from 'src/shared/ui/svg-color';
 import { usePermission } from 'src/module/core/features/auth/hooks/use-permission';
 
@@ -17,13 +18,8 @@ const icon = (name: string) => (
 );
 
 const ICONS = {
-  stockAnalysis: icon('ic-analytics'),
-  sectorComponent: icon('ic-kanban'),
-  orderbook: icon('ic-order'),
-  orderbookPlayback: icon('ic-order'),
-  orderbookAnalysis: icon('ic-banking'),
-  tradebookAnalysis: icon('ic-invoice'),
-  brokerAnalysis: icon('ic-user'),
+  home: icon('ic-dashboard'),
+  settings: icon('ic-lock'),
 };
 
 // ----------------------------------------------------------------------
@@ -76,47 +72,34 @@ export function useNavData(): NavSectionProps['data'] {
       {
         items: [
           {
-            title: t('stockAnalysis'),
+            title: t('home'),
             path: paths.dashboard.root,
-            icon: ICONS.stockAnalysis,
+            icon: ICONS.home,
           },
           {
-            title: t('sectorComponent'),
-            path: paths.dashboard.sectorComponent,
-            icon: ICONS.sectorComponent,
-          },
-          {
-            title: t('orderbook'),
-            path: paths.dashboard.orderbook,
-            icon: ICONS.orderbook,
-          },
-          {
-            title: t('orderbookPlayback'),
-            path: paths.dashboard.orderbookPlayback,
-            icon: ICONS.orderbookPlayback,
-          },
-          {
-            title: t('orderbookAnalysis'),
-            path: paths.dashboard.orderbookAnalysis,
-            icon: ICONS.orderbookAnalysis,
-          },
-          {
-            title: t('tradebookAnalysis'),
-            path: paths.dashboard.tradebookAnalysis,
-            icon: ICONS.tradebookAnalysis,
-          },
-          {
-            title: t('brokerAnalysis.root'),
-            path: paths.dashboard.brokerAnalysis.root,
-            icon: ICONS.brokerAnalysis,
+            title: t('settings.root'),
+            path: paths.dashboard.settings.branches,
+            icon: ICONS.settings,
             children: [
               {
-                title: t('brokerAnalysis.brokerActivity'),
-                path: paths.dashboard.brokerAnalysis.brokerActivity,
+                title: t('settings.branches'),
+                path: paths.dashboard.settings.branches,
+                permission: PERM.branches.read,
               },
               {
-                title: t('brokerAnalysis.stockActivity'),
-                path: paths.dashboard.brokerAnalysis.stockActivity,
+                title: t('settings.roles'),
+                path: paths.dashboard.settings.roles,
+                permission: PERM.roles.read,
+              },
+              {
+                title: t('settings.users'),
+                path: paths.dashboard.settings.users,
+                permission: PERM.userManagement.read,
+              },
+              {
+                title: t('settings.translationOverride'),
+                path: paths.dashboard.settings.translationOverride,
+                permission: PERM.translationOverrides.read,
               },
             ],
           },

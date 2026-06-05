@@ -1,15 +1,5 @@
 {
-  "stockAnalysis": "Analisis Saham",
-  "sectorComponent": "Komponen Sektor",
-  "orderbook": "Orderbook",
-  "orderbookPlayback": "Playback Orderbook",
-  "orderbookAnalysis": "Analisis Orderbook",
-  "tradebookAnalysis": "Analisis Tradebook",
-  "brokerAnalysis": {
-    "root": "Analisis Broker",
-    "brokerActivity": "Aktivitas Broker",
-    "stockActivity": "Aktivitas Saham"
-  },
+  "home": "Beranda",
   "settings": {
     "root": "Pengaturan",
     "branches": "Cabang",

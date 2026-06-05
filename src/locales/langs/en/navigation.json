@@ -1,15 +1,5 @@
 {
-  "stockAnalysis": "Stock Analysis",
-  "sectorComponent": "Sector Component",
-  "orderbook": "Orderbook",
-  "orderbookPlayback": "Orderbook Playback",
-  "orderbookAnalysis": "Orderbook Analysis",
-  "tradebookAnalysis": "Tradebook Analysis",
-  "brokerAnalysis": {
-    "root": "Broker Analysis",
-    "brokerActivity": "Broker Activity",
-    "stockActivity": "Stock Activity"
-  },
+  "home": "Home",
   "settings": {
     "root": "Settings",
     "branches": "Branches",

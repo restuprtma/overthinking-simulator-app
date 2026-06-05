@@ -13,15 +13,7 @@ import { usePathname } from '../hooks';
 
 // ----------------------------------------------------------------------
 
-const HomePage = lazy(() => import('src/module/analysis/features/stock-analysis/pages'));
-const OrderbookPage = lazy(() => import('src/module/analysis/features/orderbook/pages'));
-const OrderbookPlaybackPage = lazy(
-  () => import('src/module/analysis/features/orderbook-playback/pages')
-);
-const BrokerActivityPage = lazy(
-  () => import('src/module/analysis/features/broker-activity/pages')
-);
-const StockActivityPage = lazy(() => import('src/module/analysis/features/stock-activity/pages'));
+const HomePage = lazy(() => import('src/module/core/features/home/pages'));
 
 const BranchesListPage = lazy(() => import('src/module/core/features/branches/pages/list'));
 const RolesListPage = lazy(() => import('src/module/core/features/roles/pages/list'));
@@ -61,10 +53,6 @@ export const dashboardRoutes: RouteObject[] = [
     element: CONFIG.auth.skip ? dashboardLayout() : <AuthGuard>{dashboardLayout()}</AuthGuard>,
     children: [
       { element: <HomePage />, index: true },
-      { path: 'orderbook', element: <OrderbookPage /> },
-      { path: 'orderbook-playback', element: <OrderbookPlaybackPage /> },
-      { path: 'broker-analysis/broker-activity', element: <BrokerActivityPage /> },
-      { path: 'broker-analysis/stock-activity', element: <StockActivityPage /> },
       { path: 'settings/branches', element: gated(PERM.branches.read, <BranchesListPage />) },
       { path: 'settings/roles', element: gated(PERM.roles.read, <RolesListPage />) },
       {
