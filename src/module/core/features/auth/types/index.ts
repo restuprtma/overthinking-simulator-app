@@ -52,6 +52,12 @@ export type SignInResponse = TokenPair & {
   permissions: string[];
 };
 
+export type SignUpResponse = {
+  message: string;
+  user: User;
+  company: Company;
+};
+
 export type GoogleSignInParams = {
   id_token: string;
 };
@@ -88,9 +94,25 @@ export type AuthState = {
   companyVersion: number;
 };
 
+export type SignInParams = {
+  login: string;
+  password: string;
+};
+
+export type SignUpParams = {
+  email: string;
+  username: string;
+  password: string;
+  full_name?: string;
+  phone?: string;
+  company_name: string;
+};
+
 export type AuthContextValue = AuthState & {
   authenticated: boolean;
   unauthenticated: boolean;
+  signIn: (params: SignInParams) => Promise<void>;
+  signUp: (params: SignUpParams) => Promise<void>;
   signInWithGoogle: () => Promise<{ isNewUser: boolean }>;
   signOut: (options?: { allDevices?: boolean }) => Promise<void>;
   switchCompany: (companyId: string) => Promise<void>;

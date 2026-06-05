@@ -29,48 +29,31 @@ export function BrandLogo({
     <BrandLogoRoot
       component={RouterLink}
       href={href}
-      aria-label="Tuai logo"
+      aria-label="Venturo logo"
       underline="none"
       className={mergeClasses([logoClasses.root, className])}
       sx={[
         {
           display: 'inline-flex',
           alignItems: 'center',
-          ...(isSingle && { width: 32, height: 32 }),
           ...(disabled && { pointerEvents: 'none' }),
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
       {...other}
     >
-      {isSingle ? (
-        <Box
-          component="img"
-          alt="Tuai logo"
-          src="/logo/tuai-logo-mark.png"
-          sx={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain',
-            flexShrink: 0,
-          }}
-        />
-      ) : (
-        <Box
-          component="img"
-          alt="Tuai - Smart Stock Trading Utility"
-          src="/logo/tuai-logo-linear-light.png"
-          sx={(theme) => ({
-            height: 36,
-            width: 'auto',
-            objectFit: 'contain',
-            flexShrink: 0,
-            ...theme.applyStyles('dark', {
-              content: `url(/logo/tuai-logo-linear-dark.png)`,
-            }),
-          })}
-        />
-      )}
+      <Box
+        component="img"
+        alt="Venturo logo"
+        src="/logo/venturo-logo.png"
+        sx={{
+          height: isSingle ? 32 : 36,
+          width: 'auto',
+          maxWidth: '100%',
+          objectFit: 'contain',
+          flexShrink: 0,
+        }}
+      />
     </BrandLogoRoot>
   );
 }

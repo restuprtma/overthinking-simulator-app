@@ -120,6 +120,8 @@ export function withoutAuthRefresh(config: AxiosRequestConfig = {}): AxiosReques
 
 export const endpoints = {
   auth: {
+    signIn: '/core/v1/auth/signin',
+    signUp: '/core/v1/auth/signup',
     google: '/core/v1/auth/google',
     refresh: '/core/v1/auth/refresh',
     logout: '/core/v1/auth/logout',

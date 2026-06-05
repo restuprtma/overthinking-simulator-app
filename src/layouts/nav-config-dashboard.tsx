@@ -7,7 +7,6 @@ import { paths } from 'src/routes/paths';
 
 import { useTranslate } from 'src/locales';
 import { CONFIG } from 'src/shared/config';
-import { PERM } from 'src/shared/lib/permissions';
 import { SvgColor } from 'src/shared/ui/svg-color';
 import { usePermission } from 'src/module/core/features/auth/hooks/use-permission';
 
@@ -19,7 +18,6 @@ const icon = (name: string) => (
 
 const ICONS = {
   home: icon('ic-dashboard'),
-  settings: icon('ic-lock'),
 };
 
 // ----------------------------------------------------------------------
@@ -75,33 +73,6 @@ export function useNavData(): NavSectionProps['data'] {
             title: t('home'),
             path: paths.dashboard.root,
             icon: ICONS.home,
-          },
-          {
-            title: t('settings.root'),
-            path: paths.dashboard.settings.branches,
-            icon: ICONS.settings,
-            children: [
-              {
-                title: t('settings.branches'),
-                path: paths.dashboard.settings.branches,
-                permission: PERM.branches.read,
-              },
-              {
-                title: t('settings.roles'),
-                path: paths.dashboard.settings.roles,
-                permission: PERM.roles.read,
-              },
-              {
-                title: t('settings.users'),
-                path: paths.dashboard.settings.users,
-                permission: PERM.userManagement.read,
-              },
-              {
-                title: t('settings.translationOverride'),
-                path: paths.dashboard.settings.translationOverride,
-                permission: PERM.translationOverrides.read,
-              },
-            ],
           },
         ],
       },

@@ -1,4 +1,4 @@
-import type { AuthState, AuthContextValue } from '../../types';
+import type { AuthState, SignInParams, SignUpParams, AuthContextValue } from '../../types';
 
 import { useMemo, useState, useEffect, useCallback } from 'react';
 
@@ -140,6 +140,30 @@ export function AuthProvider({ children }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const signIn = useCallback(async (params: SignInParams) => {
+    const res = await authApi.signIn(params);
+    setTokens(res.access_token, res.refresh_token);
+    setActiveCompanyId(res.company?.id ?? null);
+    setState({
+      loading: false,
+      user: res.user,
+      company: res.company,
+      client: res.client,
+      roles: res.roles,
+      permissions: res.permissions,
+      isSuperAdmin: false,
+      companyVersion: 0,
+    });
+  }, []);
+
+  const signUp = useCallback(
+    async (params: SignUpParams) => {
+      await authApi.signUp(params);
+      await signIn({ login: params.email, password: params.password });
+    },
+    [signIn]
+  );
+
   const signInWithGoogle = useCallback(async () => {
     const idToken = await getGoogleIdToken();
     const res = await authApi.signInWithGoogle({ id_token: idToken });
@@ -197,12 +221,14 @@ export function AuthProvider({ children }: Props) {
       ...state,
       authenticated: !state.loading && !!state.user,
       unauthenticated: !state.loading && !state.user,
+      signIn,
+      signUp,
       signInWithGoogle,
       signOut,
       switchCompany,
       checkUserSession,
     }),
-    [state, signInWithGoogle, signOut, switchCompany, checkUserSession]
+    [state, signIn, signUp, signInWithGoogle, signOut, switchCompany, checkUserSession]
   );
 
   return <AuthContext value={value}>{children}</AuthContext>;

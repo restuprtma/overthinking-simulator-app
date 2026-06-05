@@ -1,7 +1,11 @@
 import type {
   TokenPair,
   MeResponse,
+  SignInParams,
+  SignUpParams,
   ApiEnvelope,
+  SignInResponse,
+  SignUpResponse,
   CompanyMembership,
   GoogleSignInParams,
   GoogleSignInResponse,
@@ -17,6 +21,14 @@ async function unwrap<T>(promise: Promise<{ data: ApiEnvelope<T> }>): Promise<T>
     throw new Error(payload.errors || payload.message || 'Empty response');
   }
   return payload.data;
+}
+
+export function signIn(params: SignInParams) {
+  return unwrap<SignInResponse>(axios.post(endpoints.auth.signIn, params));
+}
+
+export function signUp(params: SignUpParams) {
+  return unwrap<SignUpResponse>(axios.post(endpoints.auth.signUp, params));
 }
 
 export function signInWithGoogle(params: GoogleSignInParams) {
