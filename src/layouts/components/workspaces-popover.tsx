@@ -1,33 +1,60 @@
 import type { Theme, SxProps } from '@mui/material/styles';
 import type { ButtonBaseProps } from '@mui/material/ButtonBase';
+import type { Company } from 'src/module/core/features/companies/types';
+import type { CompanyMembership } from 'src/module/core/features/auth/types';
 
 import { useState } from 'react';
 import { usePopover } from 'minimal-shared/hooks';
 
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import CircularProgress from '@mui/material/CircularProgress';
 
+import { useTranslate } from 'src/locales';
+import { toast } from 'src/shared/ui/snackbar';
 import { Iconify } from 'src/shared/ui/iconify';
+import { PERM } from 'src/shared/lib/permissions';
 import { Scrollbar } from 'src/shared/ui/scrollbar';
 import { CustomPopover } from 'src/shared/ui/custom-popover';
+import { usePermission } from 'src/module/core/features/auth/hooks/use-permission';
 import { useCompanies, useAuthContext } from 'src/module/core/features/auth/hooks';
+import { CompanyFormDialog } from 'src/module/core/features/companies/components/company-form-dialog';
 
 type WorkspacesPopoverProps = ButtonBaseProps;
 
 export function WorkspacesPopover({ sx, ...other }: WorkspacesPopoverProps) {
   const mediaQuery = 'sm';
 
+  const { t } = useTranslate('companies');
+  const { can } = usePermission();
+  const canCreate = can(PERM.companies.create);
+  const canUpdate = can(PERM.companies.update);
+
   const { open, anchorEl, onClose, onOpen } = usePopover();
   const { company, switchCompany } = useAuthContext();
-  const { companies, loading } = useCompanies();
+  const { companies, loading, refetch } = useCompanies();
 
   const [switchingId, setSwitchingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [form, setForm] = useState<{ mode: 'new' | 'edit'; seed: CompanyMembership | null } | null>(
+    null
+  );
+
+  const openForm = (mode: 'new' | 'edit', seed: CompanyMembership | null) => {
+    onClose();
+    setForm({ mode, seed });
+  };
+
+  const handleSaved = (saved: Company) => {
+    setForm(null);
+    refetch();
+    toast.success(t('feedback.saved', { name: saved.name }));
+  };
 
   const handleSwitch = async (id: string) => {
     if (id === company?.id) {
@@ -89,12 +116,25 @@ export function WorkspacesPopover({ sx, ...other }: WorkspacesPopoverProps) {
 
       <Box
         component="span"
-        sx={{ typography: 'subtitle2', display: { xs: 'none', [mediaQuery]: 'inline-flex' } }}
+        sx={{
+          flexGrow: 1,
+          minWidth: 0,
+          overflow: 'hidden',
+          textAlign: 'left',
+          whiteSpace: 'nowrap',
+          typography: 'subtitle2',
+          textOverflow: 'ellipsis',
+          display: { xs: 'none', [mediaQuery]: 'block' },
+        }}
       >
         {currentName}
       </Box>
 
-      <Iconify width={16} icon="carbon:chevron-sort" sx={{ color: 'text.disabled' }} />
+      <Iconify
+        width={16}
+        icon="carbon:chevron-sort"
+        sx={{ flexShrink: 0, color: 'text.disabled' }}
+      />
     </ButtonBase>
   );
 
@@ -104,8 +144,8 @@ export function WorkspacesPopover({ sx, ...other }: WorkspacesPopoverProps) {
       anchorEl={anchorEl}
       onClose={onClose}
       slotProps={{
-        arrow: { placement: 'top-left' },
-        paper: { sx: { mt: 0.5, ml: -1.55, width: 280 } },
+        arrow: { placement: 'left-top' },
+        paper: { sx: { width: 280 } },
       }}
     >
       <Scrollbar sx={{ maxHeight: 320 }}>
@@ -181,10 +221,45 @@ export function WorkspacesPopover({ sx, ...other }: WorkspacesPopoverProps) {
                     {option.name}
                   </Typography>
 
-                  {isSwitching && <CircularProgress size={14} />}
+                  {isSwitching ? (
+                    <CircularProgress size={14} />
+                  ) : (
+                    canUpdate &&
+                    isSelected && (
+                      <Box
+                        component="span"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openForm('edit', option);
+                        }}
+                        sx={{
+                          p: 0.5,
+                          display: 'inline-flex',
+                          borderRadius: 1,
+                          color: 'text.disabled',
+                          '&:hover': { bgcolor: 'action.hover', color: 'text.primary' },
+                        }}
+                      >
+                        <Iconify icon="solar:pen-bold" width={16} />
+                      </Box>
+                    )
+                  )}
                 </MenuItem>
               );
             })}
+
+            {canCreate && (
+              <>
+                <Divider sx={{ my: 0.5, borderStyle: 'dashed' }} />
+                <MenuItem
+                  onClick={() => openForm('new', null)}
+                  sx={{ height: 40, gap: 1, color: 'primary.main' }}
+                >
+                  <Iconify icon="mingcute:add-line" width={18} />
+                  <Typography variant="body2">{t('form.newTitle')}</Typography>
+                </MenuItem>
+              </>
+            )}
           </MenuList>
         )}
       </Scrollbar>
@@ -201,6 +276,15 @@ export function WorkspacesPopover({ sx, ...other }: WorkspacesPopoverProps) {
     <>
       {renderButton()}
       {renderMenuList()}
+
+      <CompanyFormDialog
+        open={!!form}
+        mode={form?.mode ?? 'new'}
+        seed={form?.mode === 'edit' ? form.seed : null}
+        parentOptions={companies.map((c) => ({ id: c.id, name: c.name }))}
+        onClose={() => setForm(null)}
+        onSaved={handleSaved}
+      />
     </>
   );
 }
