@@ -23,5 +23,9 @@ export const paths = {
       users: '/settings/users',
       translationOverride: '/settings/translation-override',
     },
+    demo: {
+      item: '/demo/item',
+      itemEmpty: '/demo/item-empty',
+    },
   },
 };

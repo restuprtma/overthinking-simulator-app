@@ -21,6 +21,7 @@ const ICONS = {
   finance: icon('ic-banking'),
   monitoring: icon('ic-analytics'),
   sales: icon('ic-ecommerce'),
+  demoItem: icon('ic-menu-item'),
 };
 
 // ----------------------------------------------------------------------
@@ -91,6 +92,21 @@ export function useNavData(): NavSectionProps['data'] {
             title: t('dashboards.sales'),
             path: paths.dashboard.dashboards.sales,
             icon: ICONS.sales,
+          },
+        ],
+      },
+      {
+        subheader: t('demo.root'),
+        items: [
+          {
+            title: t('demo.item'),
+            path: paths.dashboard.demo.item,
+            icon: ICONS.demoItem,
+          },
+          {
+            title: t('demo.itemEmpty'),
+            path: paths.dashboard.demo.itemEmpty,
+            icon: ICONS.demoItem,
           },
         ],
       },

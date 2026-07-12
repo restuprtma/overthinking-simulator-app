@@ -28,6 +28,9 @@ const TranslationOverridePage = lazy(
   () => import('src/module/core/features/translation-override/pages/list')
 );
 
+const DemoItemPage = lazy(() => import('src/module/core/features/demo/pages/list'));
+const DemoItemEmptyPage = lazy(() => import('src/module/core/features/demo/pages/list-empty'));
+
 // ----------------------------------------------------------------------
 
 function SuspenseOutlet() {
@@ -72,6 +75,8 @@ export const dashboardRoutes: RouteObject[] = [
         path: 'settings/translation-override',
         element: gated(PERM.translationOverrides.read, <TranslationOverridePage />),
       },
+      { path: 'demo/item', element: <DemoItemPage /> },
+      { path: 'demo/item-empty', element: <DemoItemEmptyPage /> },
     ],
   },
 ];

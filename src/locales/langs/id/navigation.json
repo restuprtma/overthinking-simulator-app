@@ -12,6 +12,11 @@
     "users": "Pengguna",
     "translationOverride": "Kustomisasi Istilah"
   },
+  "demo": {
+    "root": "Demo Page",
+    "item": "Item",
+    "itemEmpty": "Item Empty"
+  },
   "account": {
     "profile": "Profil",
     "theme": "Tema",
