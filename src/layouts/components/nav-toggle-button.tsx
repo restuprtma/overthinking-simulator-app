@@ -22,12 +22,15 @@ export function NavToggleButton({ isNavMini, sx, ...other }: NavToggleButtonProp
           position: 'absolute',
           color: 'action.active',
           bgcolor: 'background.default',
-          transform: 'translate(-50%, -50%)',
+          transform: 'translate(-50%, 50%)',
           zIndex: 'var(--layout-nav-zIndex)',
-          top: 'calc(var(--layout-header-desktop-height) / 2)',
+          // Anchored to the account footer instead of the header: the offset is
+          // the footer's bottom padding (16px) + half the profile row height
+          // (52px expanded / 40px mini), so the button sits level with the avatar.
+          bottom: isNavMini ? 36 : 42,
           left: isNavMini ? 'var(--layout-nav-mini-width)' : 'var(--layout-nav-vertical-width)',
           border: `1px solid ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}`,
-          transition: theme.transitions.create(['left'], {
+          transition: theme.transitions.create(['left', 'bottom'], {
             easing: 'var(--layout-transition-easing)',
             duration: 'var(--layout-transition-duration)',
           }),
