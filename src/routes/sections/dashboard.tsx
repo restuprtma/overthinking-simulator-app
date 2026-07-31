@@ -30,6 +30,8 @@ const TranslationOverridePage = lazy(
 
 const DemoItemPage = lazy(() => import('src/module/core/features/demo/pages/list'));
 const DemoItemEmptyPage = lazy(() => import('src/module/core/features/demo/pages/list-empty'));
+const DemoOrderPage = lazy(() => import('src/module/core/features/demo-order/pages/list'));
+const DemoOrderDetailPage = lazy(() => import('src/module/core/features/demo-order/pages/detail'));
 
 // ----------------------------------------------------------------------
 
@@ -77,6 +79,8 @@ export const dashboardRoutes: RouteObject[] = [
       },
       { path: 'demo/item', element: <DemoItemPage /> },
       { path: 'demo/item-empty', element: <DemoItemEmptyPage /> },
+      { path: 'demo/order', element: <DemoOrderPage /> },
+      { path: 'demo/order/:id', element: <DemoOrderDetailPage /> },
     ],
   },
 ];

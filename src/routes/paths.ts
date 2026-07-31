@@ -26,6 +26,8 @@ export const paths = {
     demo: {
       item: '/demo/item',
       itemEmpty: '/demo/item-empty',
+      order: '/demo/order',
+      orderDetail: (id: string) => `/demo/order/${id}`,
     },
   },
 };

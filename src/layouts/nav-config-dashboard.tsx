@@ -22,6 +22,7 @@ const ICONS = {
   monitoring: icon('ic-analytics'),
   sales: icon('ic-ecommerce'),
   demoItem: icon('ic-menu-item'),
+  demoOrder: icon('ic-order'),
 };
 
 // ----------------------------------------------------------------------
@@ -107,6 +108,11 @@ export function useNavData(): NavSectionProps['data'] {
             title: t('demo.itemEmpty'),
             path: paths.dashboard.demo.itemEmpty,
             icon: ICONS.demoItem,
+          },
+          {
+            title: t('demo.order'),
+            path: paths.dashboard.demo.order,
+            icon: ICONS.demoOrder,
           },
         ],
       },

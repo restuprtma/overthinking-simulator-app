@@ -15,7 +15,8 @@
   "demo": {
     "root": "Demo Page",
     "item": "Item",
-    "itemEmpty": "Item Empty"
+    "itemEmpty": "Item Empty",
+    "order": "Pesanan"
   },
   "account": {
     "profile": "Profil",
