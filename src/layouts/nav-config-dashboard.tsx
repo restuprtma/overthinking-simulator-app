@@ -19,6 +19,7 @@ const icon = (name: string) => (
 const ICONS = {
   home: icon('ic-dashboard'),
   simulator: icon('ic-chat'),
+  settings: icon('ic-params'),
 };
 
 // ----------------------------------------------------------------------
@@ -79,6 +80,11 @@ export function useNavData(): NavSectionProps['data'] {
             title: t('simulator'),
             path: paths.dashboard.simulator.root,
             icon: ICONS.simulator,
+          },
+          {
+            title: t('settings.credentials'),
+            path: paths.dashboard.settings.credentials,
+            icon: ICONS.settings,
           },
         ],
       },

@@ -11,6 +11,7 @@
     "branches": "Cabang",
     "roles": "Roles",
     "users": "Pengguna",
+    "credentials": "Kredensial Gemini",
     "translationOverride": "Kustomisasi Istilah"
   },
   "demo": {

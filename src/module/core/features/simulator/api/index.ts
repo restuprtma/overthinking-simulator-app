@@ -1,4 +1,4 @@
-import type { Reflection, ReflectionSummary } from '../types';
+import type { Reflection, GeminiCredential, ReflectionSummary } from '../types';
 
 import axios, { endpoints } from 'src/shared/lib/axios';
 
@@ -47,4 +47,16 @@ export async function getReflection(id: string): Promise<Reflection> {
   );
   if (!res.data.data) throw new Error(res.data.message || 'Reflection not found');
   return res.data.data;
+}
+
+export async function getGeminiCredentials(): Promise<GeminiCredential[]> {
+  const res = await axios.get<{
+    data: { credentials: GeminiCredential[] } | null;
+    message: string;
+  }>(endpoints.settings.geminiCredentials);
+  return res.data.data?.credentials ?? [];
+}
+
+export async function updateGeminiCredentials(credentials: GeminiCredential[]): Promise<void> {
+  await axios.put(endpoints.settings.geminiCredentials, { credentials });
 }

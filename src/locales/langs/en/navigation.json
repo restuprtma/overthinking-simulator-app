@@ -11,6 +11,7 @@
     "branches": "Branches",
     "roles": "Roles",
     "users": "Users",
+    "credentials": "Gemini Credentials",
     "translationOverride": "Term Customization"
   },
   "demo": {

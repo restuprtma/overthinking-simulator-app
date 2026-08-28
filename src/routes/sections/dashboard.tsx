@@ -21,6 +21,9 @@ const UsersListPage = lazy(() => import('src/module/core/features/users/pages/li
 const SimulatorPage = lazy(() => import('src/module/core/features/simulator/pages'));
 const SimulatorHistoryPage = lazy(() => import('src/module/core/features/simulator/pages/history'));
 const SimulatorDetailPage = lazy(() => import('src/module/core/features/simulator/pages/detail'));
+const CredentialsSettingsPage = lazy(
+  () => import('src/module/core/features/simulator/pages/settings')
+);
 
 // ----------------------------------------------------------------------
 
@@ -56,6 +59,7 @@ export const dashboardRoutes: RouteObject[] = [
       { path: 'simulator', element: <SimulatorPage /> },
       { path: 'simulator/history', element: <SimulatorHistoryPage /> },
       { path: 'simulator/:id', element: <SimulatorDetailPage /> },
+      { path: 'settings/credentials', element: <CredentialsSettingsPage /> },
       { path: 'settings/roles', element: gated(PERM.roles.read, <RolesListPage />) },
       {
         path: 'settings/users',

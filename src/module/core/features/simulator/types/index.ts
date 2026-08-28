@@ -29,3 +29,8 @@ export interface ReflectionSummary {
   safety_triggered: boolean;
   created_at: string;
 }
+
+export interface GeminiCredential {
+  key: string;
+  model: string;
+}

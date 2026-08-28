@@ -143,5 +143,8 @@ export const endpoints = {
     list: '/core/v1/reflections',
     byId: (id: string) => `/core/v1/reflections/${id}`,
   },
+  settings: {
+    geminiCredentials: '/core/v1/settings/gemini-credentials',
+  },
 } as const;
 

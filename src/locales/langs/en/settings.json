@@ -1,5 +1,18 @@
 {
   "title": "Settings",
+  "credentialsTitle": "Gemini Credentials Settings",
+  "credentialsDescription": "Backup key + model list. The system tries them in order when a limit is hit.",
+  "keyLabel": "API Key",
+  "modelLabel": "Model",
+  "keyPlaceholder": "Paste API key",
+  "modelPlaceholder": "e.g. gemini-2.5-flash",
+  "addRow": "Add row",
+  "remove": "Remove",
+  "save": "Save",
+  "saved": "Credentials updated successfully.",
+  "notSet": "Not set",
+  "maskedHint": "Keys are shown masked for security.",
+  "errorGeneric": "Something went wrong. Try again.",
   "actions": {
     "resetAll": "Reset all",
     "close": "Close",
