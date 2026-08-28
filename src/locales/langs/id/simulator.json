@@ -1,0 +1,18 @@
+{
+  "title": "Simulator Refleksi",
+  "subtitle": "Tulis pikiran yang sedang mengganggu, lalu lihat Si Cemas dan Si Realistis berdebat.",
+  "thoughtLabel": "Pikiran kamu",
+  "thoughtPlaceholder": "Contoh: atasan belum balas chat, pasti pekerjaan saya buruk.",
+  "submit": "Mulai Refleksi",
+  "submitting": "Memproses...",
+  "disclaimer": "Overthinking Simulator adalah alat refleksi diri ringan, bukan pengganti terapi profesional.",
+  "historyTitle": "Riwayat Refleksi",
+  "emptyHistory": "Belum ada refleksi.",
+  "cemas": "Si Cemas",
+  "realistis": "Si Realistis",
+  "suggestion": "Langkah kecil untuk hari ini",
+  "safetyTitle": "Kamu tidak sendirian",
+  "viewDetail": "Lihat",
+  "errorGeneric": "Terjadi kesalahan. Coba lagi.",
+  "notFound": "Refleksi tidak ditemukan."
+}

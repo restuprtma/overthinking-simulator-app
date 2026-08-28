@@ -1,0 +1,18 @@
+{
+  "title": "Reflection Simulator",
+  "subtitle": "Write down a thought that is bothering you, then watch Si Cemas and Si Realistis debate.",
+  "thoughtLabel": "Your thought",
+  "thoughtPlaceholder": "Example: my boss hasn't replied to my chat, my work must be terrible.",
+  "submit": "Start Reflection",
+  "submitting": "Processing...",
+  "disclaimer": "Overthinking Simulator is a lightweight self-reflection tool, not a substitute for professional therapy.",
+  "historyTitle": "Reflection History",
+  "emptyHistory": "No reflections yet.",
+  "cemas": "Si Cemas",
+  "realistis": "Si Realistis",
+  "suggestion": "One small step for today",
+  "safetyTitle": "You are not alone",
+  "viewDetail": "View",
+  "errorGeneric": "Something went wrong. Try again.",
+  "notFound": "Reflection not found."
+}
