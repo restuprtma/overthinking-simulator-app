@@ -13,6 +13,10 @@
   "suggestion": "Langkah kecil untuk hari ini",
   "safetyTitle": "Kamu tidak sendirian",
   "viewDetail": "Lihat",
+  "newReflection": "Refleksi Baru",
+  "backToHistory": "Kembali ke Riwayat",
+  "yourThought": "Pikiran kamu",
+  "loading": "Memuat...",
   "errorGeneric": "Terjadi kesalahan. Coba lagi.",
   "notFound": "Refleksi tidak ditemukan."
 }

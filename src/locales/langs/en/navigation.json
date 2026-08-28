@@ -1,5 +1,6 @@
 {
   "home": "Home",
+  "simulator": "Simulator",
   "dashboards": {
     "finance": "Finance",
     "monitoring": "Monitoring",

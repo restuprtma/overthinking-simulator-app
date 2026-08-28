@@ -18,6 +18,10 @@ const HomePage = lazy(() => import('src/module/core/features/home/pages'));
 const RolesListPage = lazy(() => import('src/module/core/features/roles/pages/list'));
 const UsersListPage = lazy(() => import('src/module/core/features/users/pages/list'));
 
+const SimulatorPage = lazy(() => import('src/module/core/features/simulator/pages'));
+const SimulatorHistoryPage = lazy(() => import('src/module/core/features/simulator/pages/history'));
+const SimulatorDetailPage = lazy(() => import('src/module/core/features/simulator/pages/detail'));
+
 // ----------------------------------------------------------------------
 
 function SuspenseOutlet() {
@@ -49,6 +53,9 @@ export const dashboardRoutes: RouteObject[] = [
     element: CONFIG.auth.skip ? dashboardLayout() : <AuthGuard>{dashboardLayout()}</AuthGuard>,
     children: [
       { element: <HomePage />, index: true },
+      { path: 'simulator', element: <SimulatorPage /> },
+      { path: 'simulator/history', element: <SimulatorHistoryPage /> },
+      { path: 'simulator/:id', element: <SimulatorDetailPage /> },
       { path: 'settings/roles', element: gated(PERM.roles.read, <RolesListPage />) },
       {
         path: 'settings/users',

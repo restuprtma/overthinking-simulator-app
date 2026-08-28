@@ -16,6 +16,10 @@ export const paths = {
       roles: '/settings/roles',
       users: '/settings/users',
     },
+    simulator: {
+      root: '/simulator',
+      history: '/simulator/history',
+    },
   },
 };
 

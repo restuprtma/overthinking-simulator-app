@@ -13,6 +13,10 @@
   "suggestion": "One small step for today",
   "safetyTitle": "You are not alone",
   "viewDetail": "View",
+  "newReflection": "New Reflection",
+  "backToHistory": "Back to History",
+  "yourThought": "Your thought",
+  "loading": "Loading...",
   "errorGeneric": "Something went wrong. Try again.",
   "notFound": "Reflection not found."
 }

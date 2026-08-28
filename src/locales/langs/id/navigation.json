@@ -1,5 +1,6 @@
 {
   "home": "Beranda",
+  "simulator": "Simulator",
   "dashboards": {
     "finance": "Keuangan",
     "monitoring": "Monitoring",
