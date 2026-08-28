@@ -8,10 +8,11 @@ import Typography from '@mui/material/Typography';
 type FormHeadProps = BoxProps & {
   icon?: React.ReactNode;
   title: React.ReactNode;
+  subtitle?: React.ReactNode;
   description?: React.ReactNode;
 };
 
-export function FormHead({ sx, icon, title, description, ...other }: FormHeadProps) {
+export function FormHead({ sx, icon, title, subtitle, description, ...other }: FormHeadProps) {
   return (
     <>
       {icon && (
@@ -35,6 +36,12 @@ export function FormHead({ sx, icon, title, description, ...other }: FormHeadPro
         {...other}
       >
         <Typography variant="h5">{title}</Typography>
+
+        {subtitle && (
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            {subtitle}
+          </Typography>
+        )}
 
         {description && (
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>

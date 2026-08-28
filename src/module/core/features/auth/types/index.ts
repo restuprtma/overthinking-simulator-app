@@ -64,7 +64,6 @@ export type SignUpParams = {
   password: string;
   full_name?: string;
   phone?: string;
-  company_name?: string;
 };
 
 export type AuthContextValue = AuthState & {

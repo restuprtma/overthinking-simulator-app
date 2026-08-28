@@ -87,7 +87,10 @@ export function JwtSignInView() {
       <Field.Text
         name="login"
         label={t('signIn.fields.login')}
-        slotProps={{ inputLabel: { shrink: true } }}
+        slotProps={{
+          inputLabel: { shrink: true },
+          htmlInput: { autoComplete: 'username' },
+        }}
       />
 
       <Field.Text
@@ -97,10 +100,15 @@ export function JwtSignInView() {
         type={showPassword.value ? 'text' : 'password'}
         slotProps={{
           inputLabel: { shrink: true },
+          htmlInput: { autoComplete: 'current-password' },
           input: {
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton onClick={showPassword.onToggle} edge="end">
+                <IconButton
+                  onClick={showPassword.onToggle}
+                  edge="end"
+                  aria-label={t('signIn.fields.password')}
+                >
                   <Iconify
                     icon={showPassword.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'}
                   />
@@ -111,14 +119,27 @@ export function JwtSignInView() {
         }}
       />
 
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Link
+          component={RouterLink}
+          href={paths.faqs}
+          variant="subtitle2"
+          underline="hover"
+          sx={{ minHeight: 44, display: 'inline-flex', alignItems: 'center' }}
+        >
+          {t('signIn.forgotPassword')}
+        </Link>
+      </Box>
+
       <Button
         fullWidth
-        color="inherit"
+        color="primary"
         size="large"
         type="submit"
         variant="contained"
         loading={isSubmitting}
         loadingIndicator={t('signIn.submitting')}
+        sx={{ minHeight: 48 }}
       >
         {t('signIn.submit')}
       </Button>
@@ -129,6 +150,7 @@ export function JwtSignInView() {
     <>
       <FormHead
         title={t('signIn.title')}
+        subtitle={t('signIn.subtitle')}
         description={
           <>
             {t('signIn.description')}
@@ -163,6 +185,7 @@ export function JwtSignInView() {
         loadingIndicator={t('signIn.googleSubmitting')}
         onClick={handleGoogleSignIn}
         startIcon={<Iconify width={22} icon="socials:google" />}
+        sx={{ minHeight: 48 }}
       >
         {t('signIn.googleSubmit')}
       </Button>

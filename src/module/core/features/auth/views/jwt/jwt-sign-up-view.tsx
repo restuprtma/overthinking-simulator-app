@@ -39,10 +39,6 @@ function makeSchema(t: TFunction) {
       .min(8, { message: t('validation.passwordMin') }),
     full_name: z.string().max(255).optional(),
     phone: z.string().max(20).optional(),
-    company_name: z
-      .string()
-      .min(2, { message: t('validation.companyNameMin') })
-      .max(255, { message: t('validation.companyNameMax') }),
   });
 }
 
@@ -66,7 +62,6 @@ export function JwtSignUpView() {
       password: '',
       full_name: '',
       phone: '',
-      company_name: '',
     },
   });
 
@@ -84,7 +79,6 @@ export function JwtSignUpView() {
         password: data.password,
         full_name: data.full_name || undefined,
         phone: data.phone || undefined,
-        company_name: data.company_name,
       });
       router.refresh();
     } catch (error) {
@@ -97,34 +91,37 @@ export function JwtSignUpView() {
       <Field.Text
         name="full_name"
         label={t('signUp.fields.fullName')}
-        slotProps={{ inputLabel: { shrink: true } }}
+        slotProps={{
+          inputLabel: { shrink: true },
+          htmlInput: { autoComplete: 'name' },
+        }}
       />
 
-      <Box
-        sx={{ display: 'flex', gap: { xs: 3, sm: 2 }, flexDirection: { xs: 'column', sm: 'row' } }}
-      >
-        <Field.Text
-          name="email"
-          label={t('signUp.fields.email')}
-          slotProps={{ inputLabel: { shrink: true } }}
-        />
-        <Field.Text
-          name="username"
-          label={t('signUp.fields.username')}
-          slotProps={{ inputLabel: { shrink: true } }}
-        />
-      </Box>
+      <Field.Text
+        name="email"
+        label={t('signUp.fields.email')}
+        slotProps={{
+          inputLabel: { shrink: true },
+          htmlInput: { autoComplete: 'email' },
+        }}
+      />
+
+      <Field.Text
+        name="username"
+        label={t('signUp.fields.username')}
+        slotProps={{
+          inputLabel: { shrink: true },
+          htmlInput: { autoComplete: 'username' },
+        }}
+      />
 
       <Field.Text
         name="phone"
         label={t('signUp.fields.phone')}
-        slotProps={{ inputLabel: { shrink: true } }}
-      />
-
-      <Field.Text
-        name="company_name"
-        label={t('signUp.fields.companyName')}
-        slotProps={{ inputLabel: { shrink: true } }}
+        slotProps={{
+          inputLabel: { shrink: true },
+          htmlInput: { autoComplete: 'tel' },
+        }}
       />
 
       <Field.Text
@@ -134,10 +131,15 @@ export function JwtSignUpView() {
         type={showPassword.value ? 'text' : 'password'}
         slotProps={{
           inputLabel: { shrink: true },
+          htmlInput: { autoComplete: 'new-password' },
           input: {
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton onClick={showPassword.onToggle} edge="end">
+                <IconButton
+                  onClick={showPassword.onToggle}
+                  edge="end"
+                  aria-label={t('signUp.fields.password')}
+                >
                   <Iconify icon={showPassword.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
                 </IconButton>
               </InputAdornment>
@@ -148,12 +150,13 @@ export function JwtSignUpView() {
 
       <Button
         fullWidth
-        color="inherit"
+        color="primary"
         size="large"
         type="submit"
         variant="contained"
         loading={isSubmitting}
         loadingIndicator={t('signUp.submitting')}
+        sx={{ minHeight: 48 }}
       >
         {t('signUp.submit')}
       </Button>
@@ -164,6 +167,7 @@ export function JwtSignUpView() {
     <>
       <FormHead
         title={t('signUp.title')}
+        subtitle={t('signUp.subtitle')}
         description={
           <>
             {t('signUp.description')}
