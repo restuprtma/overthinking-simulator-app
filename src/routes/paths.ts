@@ -19,6 +19,7 @@ export const paths = {
     simulator: {
       root: '/simulator',
       history: '/simulator/history',
+      detail: (id: string) => `/simulator/${id}`,
     },
   },
 };

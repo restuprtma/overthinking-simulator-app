@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
+import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 
 import { useTranslate } from 'src/locales';
@@ -19,7 +20,7 @@ export default function HistoryPage() {
 
   const handleSelect = useCallback(
     (id: string) => {
-      router.push(`/simulator/${id}`);
+      router.push(paths.dashboard.simulator.detail(id));
     },
     [router]
   );
