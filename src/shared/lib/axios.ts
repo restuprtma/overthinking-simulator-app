@@ -139,5 +139,9 @@ export const endpoints = {
       byId: (id: string) => `/core/v1/users/${id}`,
     },
   },
+  reflections: {
+    list: '/core/v1/reflections',
+    byId: (id: string) => `/core/v1/reflections/${id}`,
+  },
 } as const;
 
