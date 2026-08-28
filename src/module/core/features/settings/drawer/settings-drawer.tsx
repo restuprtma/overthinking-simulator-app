@@ -1,6 +1,6 @@
 import type { SettingsState, SettingsDrawerProps } from '../types';
 
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 import { hasKeys, varAlpha } from 'minimal-shared/utils';
 
 import Box from '@mui/material/Box';
@@ -10,10 +10,8 @@ import SvgIcon from '@mui/material/SvgIcon';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { useColorScheme } from '@mui/material/styles';
 
 import { useTranslate } from 'src/locales';
-import { Label } from 'src/shared/ui/label';
 import { Iconify } from 'src/shared/ui/iconify';
 import { Scrollbar } from 'src/shared/ui/scrollbar';
 import { themeConfig } from 'src/theme/theme-config';
@@ -32,12 +30,10 @@ import { NavColorOptions, NavLayoutOptions } from './nav-layout-option';
 
 export function SettingsDrawer({ sx, defaultSettings }: SettingsDrawerProps) {
   const settings = useSettingsContext();
-  const { mode, setMode, colorScheme } = useColorScheme();
   const { t } = useTranslate('settings');
 
   // Visible options by default settings
   const visibility = {
-    mode: hasKeys(defaultSettings, ['mode']),
     contrast: hasKeys(defaultSettings, ['contrast']),
     navColor: hasKeys(defaultSettings, ['navColor']),
     fontSize: hasKeys(defaultSettings, ['fontSize']),
@@ -46,16 +42,9 @@ export function SettingsDrawer({ sx, defaultSettings }: SettingsDrawerProps) {
     primaryColor: hasKeys(defaultSettings, ['primaryColor']),
   };
 
-  useEffect(() => {
-    if (mode !== undefined && mode !== settings.state.mode) {
-      settings.setState({ mode });
-    }
-  }, [mode, settings]);
-
   const handleReset = useCallback(() => {
     settings.onReset();
-    setMode(null);
-  }, [setMode, settings]);
+  }, [settings]);
 
   const renderHead = () => (
     <Box
@@ -87,32 +76,6 @@ export function SettingsDrawer({ sx, defaultSettings }: SettingsDrawerProps) {
         </IconButton>
       </Tooltip>
     </Box>
-  );
-
-  const renderMode = () => (
-    <BaseOption
-      label={t('options.mode')}
-      selected={settings.state.mode === 'dark'}
-      icon={<SvgIcon>{settingIcons.moon}</SvgIcon>}
-      action={
-        mode === 'system' ? (
-          <Label
-            sx={{
-              height: 20,
-              cursor: 'inherit',
-              borderRadius: '20px',
-              fontWeight: 'fontWeightSemiBold',
-            }}
-          >
-            {t('options.system')}
-          </Label>
-        ) : null
-      }
-      onChangeOption={() => {
-        setMode(colorScheme === 'light' ? 'dark' : 'light');
-        settings.setState({ mode: colorScheme === 'light' ? 'dark' : 'light' });
-      }}
-    />
   );
 
   const renderContrast = () => (
@@ -298,7 +261,6 @@ export function SettingsDrawer({ sx, defaultSettings }: SettingsDrawerProps) {
           }}
         >
           <Box sx={{ gap: 2, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
-            {visibility.mode && renderMode()}
             {visibility.contrast && renderContrast()}
           </Box>
 

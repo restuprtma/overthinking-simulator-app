@@ -94,18 +94,21 @@ export const typography: TypographyVariantsOptions = {
     ...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
   },
   h4: {
+    fontFamily: secondaryFont,
     fontWeight: baseTypography.fontWeightBold,
     lineHeight: 1.5,
     fontSize: pxToRem(20),
     ...responsiveFontSizes({ md: 24 }),
   },
   h5: {
+    fontFamily: secondaryFont,
     fontWeight: baseTypography.fontWeightBold,
     lineHeight: 1.5,
     fontSize: pxToRem(18),
     ...responsiveFontSizes({ sm: 19 }),
   },
   h6: {
+    fontFamily: secondaryFont,
     fontWeight: baseTypography.fontWeightSemiBold,
     lineHeight: 28 / 18,
     fontSize: pxToRem(17),

@@ -24,17 +24,11 @@ export const baseTheme: ThemeOptions = {
       customShadows: customShadows.light,
       opacity,
     },
-    dark: {
-      palette: palette.dark,
-      shadows: shadows.dark,
-      customShadows: customShadows.dark,
-      opacity,
-    },
   },
   mixins,
   components,
   typography,
-  shape: { borderRadius: 8 },
+  shape: { borderRadius: 12 },
   direction: themeConfig.direction,
   cssVariables: themeConfig.cssVariables,
 };

@@ -30,9 +30,14 @@ const colorVariants = [
 const MuiIconButton: Components<Theme>['MuiIconButton'] = {
   // ▼▼▼▼▼▼▼▼ 🎨 STYLE ▼▼▼▼▼▼▼▼
   styleOverrides: {
-    root: {
+    root: ({ theme }) => ({
+      minWidth: 44,
+      minHeight: 44,
+      transition: theme.transitions.create(['background-color', 'color'], {
+        duration: theme.transitions.duration.shortest,
+      }),
       variants: [...colorVariants],
-    },
+    }),
   },
 };
 

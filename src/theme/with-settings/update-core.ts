@@ -75,7 +75,6 @@ export function applySettingsToTheme(
     direction,
     colorSchemes: {
       light: updateColorScheme('light'),
-      dark: updateColorScheme('dark'),
     },
     typography: {
       ...theme.typography,
