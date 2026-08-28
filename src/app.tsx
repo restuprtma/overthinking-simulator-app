@@ -10,13 +10,11 @@ import { ProgressBar } from 'src/shared/ui/progress-bar';
 import { MotionLazy } from 'src/shared/ui/animate/motion-lazy';
 import { I18nProvider, LocalizationProvider } from 'src/locales';
 import { AuthProvider } from 'src/module/core/features/auth/context/jwt';
-import { OnboardingDialog } from 'src/module/core/features/auth/components/onboarding-dialog';
 import {
   SettingsDrawer,
   defaultSettings,
   SettingsProvider,
 } from 'src/module/core/features/settings';
-import { TranslationOverrideSync } from 'src/module/core/features/translation-override/components/translation-override-sync';
 
 // ----------------------------------------------------------------------
 
@@ -40,8 +38,6 @@ export default function App({ children }: AppProps) {
                 <ProgressBar />
                 <Snackbar />
                 <SettingsDrawer defaultSettings={defaultSettings} />
-                <OnboardingDialog />
-                <TranslationOverrideSync />
                 {children}
               </MotionLazy>
             </LocalizationProvider>

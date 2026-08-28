@@ -4,7 +4,6 @@ import { useMemo, useState, useEffect, useCallback } from 'react';
 
 import { configureAxiosAuth } from 'src/shared/lib/axios';
 import { getGoogleIdToken } from 'src/shared/lib/firebase';
-import { invalidateAllCompanyCaches } from 'src/shared/lib/cache-registry';
 
 import * as authApi from '../../api';
 import { AuthContext } from '../auth-context';
@@ -13,8 +12,6 @@ import {
   clearTokens,
   getAccessToken,
   getRefreshToken,
-  setActiveCompanyId,
-  getActiveCompanyId,
   isAccessTokenExpired,
 } from './utils';
 
@@ -25,12 +22,9 @@ type Props = {
 const INITIAL_STATE: AuthState = {
   loading: true,
   user: null,
-  company: null,
-  client: null,
   roles: [],
   permissions: [],
   isSuperAdmin: false,
-  companyVersion: 0,
 };
 
 export function AuthProvider({ children }: Props) {
@@ -39,23 +33,6 @@ export function AuthProvider({ children }: Props) {
   const applySignOut = useCallback(() => {
     clearTokens();
     setState({ ...INITIAL_STATE, loading: false });
-  }, []);
-
-  const resolveActiveCompanyId = useCallback(async (): Promise<string | null> => {
-    const saved = getActiveCompanyId();
-    if (saved) return saved;
-
-    try {
-      const companies = await authApi.getMyCompanies();
-      if (companies.length === 0) return null;
-
-      const primary = companies.find((c) => c.is_primary);
-      const owner = companies.find((c) => c.is_owner);
-      return (primary ?? owner ?? companies[0]).id;
-    } catch (error) {
-      console.error('[auth] failed to list companies:', error);
-      return null;
-    }
   }, []);
 
   const checkUserSession = useCallback(async () => {
@@ -79,48 +56,18 @@ export function AuthProvider({ children }: Props) {
 
       const me = await authApi.getMe();
 
-      if (!me.company) {
-        const targetCompanyId = await resolveActiveCompanyId();
-        if (targetCompanyId) {
-          try {
-            const res = await authApi.switchCompany(targetCompanyId);
-            setTokens(res.access_token, res.refresh_token);
-            setActiveCompanyId(res.company.id);
-            setState({
-              loading: false,
-              user: me.user,
-              company: res.company,
-              client: me.client,
-              roles: res.roles,
-              permissions: res.permissions,
-              isSuperAdmin: me.is_super_admin,
-              companyVersion: 0,
-            });
-            return;
-          } catch (switchError) {
-            console.error('[auth] failed to restore active company:', switchError);
-            setActiveCompanyId(null);
-          }
-        }
-      } else {
-        setActiveCompanyId(me.company.id);
-      }
-
       setState({
         loading: false,
         user: me.user,
-        company: me.company,
-        client: me.client,
         roles: me.roles,
         permissions: me.permissions,
         isSuperAdmin: me.is_super_admin,
-        companyVersion: 0,
       });
     } catch (error) {
       console.error('[auth] session check failed:', error);
       applySignOut();
     }
-  }, [applySignOut, resolveActiveCompanyId]);
+  }, [applySignOut]);
 
   useEffect(() => {
     configureAxiosAuth({
@@ -143,16 +90,12 @@ export function AuthProvider({ children }: Props) {
   const signIn = useCallback(async (params: SignInParams) => {
     const res = await authApi.signIn(params);
     setTokens(res.access_token, res.refresh_token);
-    setActiveCompanyId(res.company?.id ?? null);
     setState({
       loading: false,
       user: res.user,
-      company: res.company,
-      client: res.client,
       roles: res.roles,
       permissions: res.permissions,
       isSuperAdmin: false,
-      companyVersion: 0,
     });
   }, []);
 
@@ -168,16 +111,12 @@ export function AuthProvider({ children }: Props) {
     const idToken = await getGoogleIdToken();
     const res = await authApi.signInWithGoogle({ id_token: idToken });
     setTokens(res.access_token, res.refresh_token);
-    setActiveCompanyId(res.company?.id ?? null);
     setState({
       loading: false,
       user: res.user,
-      company: res.company,
-      client: res.client,
       roles: res.roles,
       permissions: res.permissions,
       isSuperAdmin: false,
-      companyVersion: 0,
     });
     return { isNewUser: res.is_new_user };
   }, []);
@@ -202,20 +141,6 @@ export function AuthProvider({ children }: Props) {
     [applySignOut]
   );
 
-  const switchCompany = useCallback(async (companyId: string) => {
-    const res = await authApi.switchCompany(companyId);
-    setTokens(res.access_token, res.refresh_token);
-    setActiveCompanyId(res.company.id);
-    invalidateAllCompanyCaches();
-    setState((prev) => ({
-      ...prev,
-      company: res.company,
-      roles: res.roles,
-      permissions: res.permissions,
-      companyVersion: prev.companyVersion + 1,
-    }));
-  }, []);
-
   const value = useMemo<AuthContextValue>(
     () => ({
       ...state,
@@ -225,11 +150,11 @@ export function AuthProvider({ children }: Props) {
       signUp,
       signInWithGoogle,
       signOut,
-      switchCompany,
       checkUserSession,
     }),
-    [state, signIn, signUp, signInWithGoogle, signOut, switchCompany, checkUserSession]
+    [state, signIn, signUp, signInWithGoogle, signOut, checkUserSession]
   );
 
   return <AuthContext value={value}>{children}</AuthContext>;
 }
+

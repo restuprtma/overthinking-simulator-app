@@ -126,20 +126,9 @@ export const endpoints = {
     refresh: '/core/v1/auth/refresh',
     logout: '/core/v1/auth/logout',
     logoutAll: '/core/v1/auth/logout-all',
-    switchCompany: '/core/v1/auth/switch-company',
     me: '/core/v1/auth/me',
-    companies: '/core/v1/auth/companies',
   },
   core: {
-    companies: {
-      list: '/core/v1/companies',
-      byId: (id: string) => `/core/v1/companies/${id}`,
-    },
-    branches: {
-      list: '/core/v1/branches',
-      byCompanies: '/core/v1/branches/by-companies',
-      byId: (id: string) => `/core/v1/branches/${id}`,
-    },
     roles: {
       list: '/core/v1/roles',
       byId: (id: string) => `/core/v1/roles/${id}`,
@@ -148,17 +137,7 @@ export const endpoints = {
     users: {
       list: '/core/v1/users',
       byId: (id: string) => `/core/v1/users/${id}`,
-      branches: (id: string) => `/core/v1/users/${id}/branches`,
-      companies: (id: string) => `/core/v1/users/${id}/companies`,
-    },
-    auditLogs: {
-      root: '/core/v1/audit-logs',
-    },
-    translationOverrides: {
-      base: (clientId: string) => `/core/v1/admin/clients/${clientId}/translation-overrides`,
-      byKey: (clientId: string, key: string) =>
-        `/core/v1/admin/clients/${clientId}/translation-overrides/${encodeURIComponent(key)}`,
-      public: '/core/v1/translation-overrides',
     },
   },
 } as const;
+

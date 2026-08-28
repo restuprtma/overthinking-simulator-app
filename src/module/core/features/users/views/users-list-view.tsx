@@ -62,7 +62,6 @@ export function UsersListView() {
       { id: 'name', label: t('table.name') },
       { id: 'email', label: t('table.email') },
       { id: 'role', label: t('table.role') },
-      { id: 'branches', label: t('table.branches') },
       { id: 'status', label: t('table.status') },
       { id: 'actions', label: '', align: 'right' as const },
     ],

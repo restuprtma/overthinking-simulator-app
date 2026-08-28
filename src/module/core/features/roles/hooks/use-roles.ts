@@ -3,9 +3,6 @@ import type { Role } from '../types';
 import i18n from 'i18next';
 import { useMemo, useState, useEffect } from 'react';
 
-import { registerCompanyCacheInvalidator } from 'src/shared/lib/cache-registry';
-import { useAuthContext } from 'src/module/core/features/auth/hooks/use-auth-context';
-
 import { listRoles } from '../api';
 
 // ----------------------------------------------------------------------
@@ -36,8 +33,6 @@ export function invalidateRolesCache() {
   inFlight = null;
 }
 
-registerCompanyCacheInvalidator(invalidateRolesCache);
-
 type State = {
   data: Role[];
   loading: boolean;
@@ -45,7 +40,6 @@ type State = {
 };
 
 export function useRoles() {
-  const { companyVersion } = useAuthContext();
   const [state, setState] = useState<State>(() => ({
     data: cache ?? [],
     loading: !cache,
@@ -67,7 +61,7 @@ export function useRoles() {
           error: err instanceof Error ? err.message : i18n.t('roles:errors.loadData'),
         })
       );
-  }, [companyVersion]);
+  }, []);
 
   const byId = useMemo(() => new Map(state.data.map((r) => [r.id, r])), [state.data]);
 
@@ -76,3 +70,4 @@ export function useRoles() {
     getById: (id: string | null | undefined) => (id ? byId.get(id) : undefined),
   };
 }
+

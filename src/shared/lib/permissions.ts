@@ -25,31 +25,5 @@ export const PERM = {
     update: 'user-management:update',
     delete: 'user-management:delete',
   },
-  branches: {
-    read: 'branches:read',
-    create: 'branches:create',
-    update: 'branches:update',
-    delete: 'branches:delete',
-  },
-  companies: {
-    read: 'companies:read',
-    create: 'companies:create',
-    update: 'companies:update',
-    delete: 'companies:delete',
-  },
-  companyUsers: {
-    read: 'company_users:read',
-    create: 'company_users:create',
-    update: 'company_users:update',
-    delete: 'company_users:delete',
-  },
-  translationOverrides: {
-    read: 'translation_overrides:read',
-    create: 'translation_overrides:create',
-    update: 'translation_overrides:update',
-    delete: 'translation_overrides:delete',
-  },
-  auditLog: {
-    read: 'audit-log:read',
-  },
 } as const;
+

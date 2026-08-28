@@ -31,26 +31,32 @@ const stats: { key: string; value: string; icon: IconifyName; color: ColorKey }[
   { key: 'users', value: '1.284', icon: 'solar:users-group-rounded-bold', color: 'warning' },
 ];
 
-const shortcuts: { key: string; href: string; icon: IconifyName; color: ColorKey }[] = [
+const shortcuts: {
+  key: string;
+  title: string;
+  desc: string;
+  href: string;
+  icon: IconifyName;
+  color: ColorKey;
+}[] = [
   {
-    key: 'finance',
-    href: paths.dashboard.dashboards.finance,
-    icon: 'solar:bill-list-bold-duotone',
+    key: 'users',
+    title: 'User Management',
+    desc: 'Manage user accounts and access.',
+    href: paths.dashboard.settings.users,
+    icon: 'solar:users-group-rounded-bold-duotone',
     color: 'primary',
   },
   {
-    key: 'monitoring',
-    href: paths.dashboard.dashboards.monitoring,
-    icon: 'solar:monitor-bold',
+    key: 'roles',
+    title: 'Roles & Permissions',
+    desc: 'Configure roles and security permissions.',
+    href: paths.dashboard.settings.roles,
+    icon: 'solar:shield-keyhole-bold-duotone',
     color: 'info',
   },
-  {
-    key: 'sales',
-    href: paths.dashboard.dashboards.sales,
-    icon: 'solar:cart-3-bold',
-    color: 'success',
-  },
 ];
+
 
 // Dummy activity feed.
 const activity: { icon: IconifyName; color: ColorKey; text: string; time: string }[] = [
@@ -177,9 +183,9 @@ export function HomeView() {
                       <Iconify icon={s.icon} width={28} />
                     </Box>
                     <Box>
-                      <Typography variant="subtitle1">{t(`shortcuts.${s.key}`)}</Typography>
+                      <Typography variant="subtitle1">{s.title}</Typography>
                       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        {t(`shortcuts.${s.key}Desc`)}
+                        {s.desc}
                       </Typography>
                     </Box>
                     <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center', color: `${s.color}.main` }}>

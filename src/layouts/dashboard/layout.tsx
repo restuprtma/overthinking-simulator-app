@@ -25,7 +25,6 @@ import { MenuButton } from '../components/menu-button';
 import { AccountDrawer } from '../components/account-drawer';
 // import { LanguagePopover } from '../components/language-popover';
 import { HeaderBreadcrumbs } from '../components/header-breadcrumbs';
-// import { WorkspacesPopover } from '../components/workspaces-popover';
 import { dashboardLayoutVars, dashboardNavColorVars } from './css-vars';
 import { MainSection, layoutClasses, HeaderSection, LayoutSection } from '../core';
 
@@ -53,7 +52,7 @@ export function DashboardLayout({
 }: DashboardLayoutProps) {
   const theme = useTheme();
 
-  const { roles, company, authenticated } = useAuthContext();
+  const { roles } = useAuthContext();
 
   const settings = useSettingsContext();
 
@@ -145,11 +144,6 @@ export function DashboardLayout({
             <VerticalDivider sx={{ [theme.breakpoints.up(layoutQuery)]: { display: 'flex' } }} />
           )}
 
-          {/** @slot Workspace popover */}
-          {/* <WorkspacesPopover
-            sx={{ ...(isNavHorizontal && { color: 'var(--layout-nav-text-primary-color)' }) }}
-          /> */}
-
           {/** @slot Breadcrumbs (derived from nav data) */}
           <VerticalDivider sx={{ display: 'none' }} />
           <HeaderBreadcrumbs data={navData} sx={{ display: 'none' }} />
@@ -230,10 +224,8 @@ export function DashboardLayout({
 
   const renderFooter = () => null;
 
-  const shouldBlankOutContent = authenticated && !company;
-
   const renderMain = () => (
-    <MainSection {...slotProps?.main}>{shouldBlankOutContent ? null : children}</MainSection>
+    <MainSection {...slotProps?.main}>{children}</MainSection>
   );
 
   return (

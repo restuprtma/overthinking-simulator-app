@@ -32,10 +32,8 @@ import { usePermission } from 'src/module/core/features/auth/hooks/use-permissio
 // ----------------------------------------------------------------------
 
 const SETTINGS_ICONS = {
-  branches: 'mingcute:location-fill',
   roles: 'solar:shield-keyhole-bold-duotone',
   users: 'solar:users-group-rounded-bold-duotone',
-  translationOverride: 'solar:chat-round-dots-bold',
 } as const;
 
 type SettingsKey = keyof typeof SETTINGS_ICONS;
@@ -53,14 +51,8 @@ export function AccountDrawer({ compact, sx, ...other }: AccountDrawerProps) {
 
   const settingsItems = (
     [
-      { key: 'branches', path: paths.dashboard.settings.branches, perm: PERM.branches.read },
       { key: 'roles', path: paths.dashboard.settings.roles, perm: PERM.roles.read },
       { key: 'users', path: paths.dashboard.settings.users, perm: PERM.userManagement.read },
-      {
-        key: 'translationOverride',
-        path: paths.dashboard.settings.translationOverride,
-        perm: PERM.translationOverrides.read,
-      },
     ] satisfies { key: SettingsKey; path: string; perm: string }[]
   ).filter((it) => can(it.perm));
 

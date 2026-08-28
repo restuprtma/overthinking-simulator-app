@@ -11,18 +11,7 @@ export type PermissionGroup = {
 export const PERMISSION_GROUPS: PermissionGroup[] = [
   {
     id: 'core',
-    resources: [
-      'roles',
-      'user-management',
-      'branches',
-      'companies',
-      'company_users',
-      'translation_overrides',
-    ],
-  },
-  {
-    id: 'audit',
-    resources: ['audit-log'],
+    resources: ['roles', 'user-management'],
   },
 ];
 

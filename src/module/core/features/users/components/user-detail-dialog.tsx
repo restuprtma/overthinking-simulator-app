@@ -37,7 +37,6 @@ export function UserDetailDialog({ open, user, onClose, onEdit, onDelete }: Prop
 
   const title = user ? user.full_name || user.username : t('detail.title');
 
-  const branchNames = user?.branches?.map((b) => b.branch_name).join(', ') ?? '';
   const lastLogin = user?.last_login_at
     ? dayjs(user.last_login_at).format('DD MMM YYYY HH:mm')
     : null;
@@ -85,12 +84,6 @@ export function UserDetailDialog({ open, user, onClose, onEdit, onDelete }: Prop
             <DetailItem label={t('form.phone')} value={user.phone} />
             <DetailItem label={t('form.role')} value={user.role_name ?? null} />
             <DetailItem label={t('detail.lastLogin')} value={lastLogin} />
-            <Box sx={{ gridColumn: { md: 'span 2' } }}>
-              <DetailItem
-                label={t('form.branchScoping')}
-                value={branchNames || t('detail.allBranches')}
-              />
-            </Box>
           </Box>
         )}
       </DialogContent>

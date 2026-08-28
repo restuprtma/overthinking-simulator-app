@@ -3,8 +3,6 @@ import type { User, UserListParams } from '../types';
 import i18n from 'i18next';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 
-import { useAuthContext } from 'src/module/core/features/auth/hooks/use-auth-context';
-
 import { listUsers } from '../api';
 
 // ----------------------------------------------------------------------
@@ -21,7 +19,6 @@ type State = {
 const INITIAL_META: Meta = { page: 1, limit: 25, total: 0, total_pages: 0 };
 
 export function useUserList(params: UserListParams) {
-  const { companyVersion } = useAuthContext();
   const key = JSON.stringify(params);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const stableParams = useMemo(() => params, [key]);
@@ -49,7 +46,8 @@ export function useUserList(params: UserListParams) {
 
   useEffect(() => {
     load();
-  }, [load, companyVersion]);
+  }, [load]);
 
   return { ...state, refresh: load };
 }
+

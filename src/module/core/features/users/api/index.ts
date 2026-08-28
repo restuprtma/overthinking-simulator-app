@@ -21,7 +21,6 @@ export async function listUsers(
       limit: params.limit ?? 100,
       search: params.search || undefined,
       is_active: params.is_active,
-      branch_id: params.branch_id || undefined,
     },
   });
   const payload = res.data;
@@ -69,13 +68,3 @@ export async function deleteUser(id: string): Promise<{ id: string }> {
   return { id };
 }
 
-export async function getUserBranches(id: string): Promise<string[]> {
-  const res = await axios.get<{ data: string[] | null; message: string }>(
-    endpoints.core.users.branches(id)
-  );
-  return res.data.data ?? [];
-}
-
-export async function syncUserBranches(id: string, branchIds: string[]): Promise<void> {
-  await axios.put(endpoints.core.users.branches(id), { branch_ids: branchIds });
-}

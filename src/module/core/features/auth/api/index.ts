@@ -6,10 +6,8 @@ import type {
   SignUpParams,
   SignInResponse,
   SignUpResponse,
-  CompanyMembership,
   GoogleSignInParams,
   GoogleSignInResponse,
-  SwitchCompanyResponse,
 } from '../types';
 
 import axios, { endpoints, withoutAuthRefresh } from 'src/shared/lib/axios';
@@ -49,14 +47,7 @@ export function logoutAll() {
   return axios.post(endpoints.auth.logoutAll);
 }
 
-export function switchCompany(company_id: string) {
-  return unwrap<SwitchCompanyResponse>(axios.post(endpoints.auth.switchCompany, { company_id }));
-}
-
 export function getMe() {
   return unwrap<MeResponse>(axios.get(endpoints.auth.me));
 }
 
-export function getMyCompanies() {
-  return unwrap<CompanyMembership[]>(axios.get(endpoints.auth.companies));
-}

@@ -12,7 +12,6 @@ import { NavSectionMini, NavSectionVertical } from 'src/shared/ui/nav-section';
 
 import { layoutClasses } from '../core';
 import { NavToggleButton } from '../components/nav-toggle-button';
-import { WorkspacesPopover } from '../components/workspaces-popover';
 
 // ----------------------------------------------------------------------
 
@@ -46,21 +45,6 @@ export function NavVertical({
           <BrandLogo />
         </Box>
       )}
-
-      <Box sx={{ px: 2.5, pb: 2 }}>
-        <WorkspacesPopover
-          sx={{
-            px: 1.5,
-            py: 1.25,
-            width: '100%',
-            borderRadius: 1,
-            justifyContent: 'flex-start',
-            border: (theme) => `1px solid ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
-            '&:hover': { bgcolor: 'action.hover' },
-            '&::before': { display: 'none' },
-          }}
-        />
-      </Box>
 
       <Scrollbar fillContent>
         <NavSectionVertical

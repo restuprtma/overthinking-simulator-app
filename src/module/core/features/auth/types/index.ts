@@ -12,31 +12,6 @@ export type User = {
   full_name: string;
 };
 
-export type Company = {
-  id: string;
-  name: string;
-};
-
-export type Client = {
-  id: string;
-  slug: string;
-  name: string;
-};
-
-export type CompanyType = 'holding' | 'subsidiary';
-
-export type CompanyMembership = {
-  id: string;
-  name: string;
-  type: CompanyType;
-  logo_url: string | null;
-  parent_id: string | null;
-  is_primary: boolean;
-  is_owner: boolean;
-  role_name: string | null;
-  role_code: string | null;
-};
-
 export type TokenPair = {
   access_token: string;
   refresh_token: string;
@@ -46,8 +21,6 @@ export type TokenPair = {
 
 export type SignInResponse = TokenPair & {
   user: User;
-  company: Company | null;
-  client: Client | null;
   roles: string[];
   permissions: string[];
 };
@@ -55,7 +28,6 @@ export type SignInResponse = TokenPair & {
 export type SignUpResponse = {
   message: string;
   user: User;
-  company: Company;
 };
 
 export type GoogleSignInParams = {
@@ -66,16 +38,8 @@ export type GoogleSignInResponse = SignInResponse & {
   is_new_user: boolean;
 };
 
-export type SwitchCompanyResponse = TokenPair & {
-  company: Company;
-  roles: string[];
-  permissions: string[];
-};
-
 export type MeResponse = {
   user: User;
-  company: Company | null;
-  client: Client | null;
   roles: string[];
   permissions: string[];
   is_super_admin: boolean;
@@ -84,14 +48,9 @@ export type MeResponse = {
 export type AuthState = {
   loading: boolean;
   user: User | null;
-  company: Company | null;
-  client: Client | null;
   roles: string[];
   permissions: string[];
   isSuperAdmin: boolean;
-  // Bumped every time the active company changes so data-fetching hooks can
-  // depend on it to refetch after a company switch.
-  companyVersion: number;
 };
 
 export type SignInParams = {
@@ -105,7 +64,7 @@ export type SignUpParams = {
   password: string;
   full_name?: string;
   phone?: string;
-  company_name: string;
+  company_name?: string;
 };
 
 export type AuthContextValue = AuthState & {
@@ -115,6 +74,6 @@ export type AuthContextValue = AuthState & {
   signUp: (params: SignUpParams) => Promise<void>;
   signInWithGoogle: () => Promise<{ isNewUser: boolean }>;
   signOut: (options?: { allDevices?: boolean }) => Promise<void>;
-  switchCompany: (companyId: string) => Promise<void>;
   checkUserSession: () => Promise<void>;
 };
+

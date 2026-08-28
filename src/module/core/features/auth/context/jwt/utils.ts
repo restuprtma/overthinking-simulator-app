@@ -1,6 +1,6 @@
 import axios from 'src/shared/lib/axios';
 
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, ACTIVE_COMPANY_ID_KEY } from './constant';
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from './constant';
 
 export function jwtDecode<T = Record<string, unknown>>(token: string): T | null {
   try {
@@ -54,21 +54,5 @@ export function setTokens(accessToken: string | null, refreshToken: string | nul
 
 export function clearTokens() {
   setTokens(null, null);
-  clearActiveCompanyId();
 }
 
-export function getActiveCompanyId(): string | null {
-  return localStorage.getItem(ACTIVE_COMPANY_ID_KEY);
-}
-
-export function setActiveCompanyId(companyId: string | null) {
-  if (companyId) {
-    localStorage.setItem(ACTIVE_COMPANY_ID_KEY, companyId);
-  } else {
-    localStorage.removeItem(ACTIVE_COMPANY_ID_KEY);
-  }
-}
-
-export function clearActiveCompanyId() {
-  localStorage.removeItem(ACTIVE_COMPANY_ID_KEY);
-}

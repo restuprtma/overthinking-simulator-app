@@ -18,11 +18,6 @@ const icon = (name: string) => (
 
 const ICONS = {
   home: icon('ic-dashboard'),
-  finance: icon('ic-banking'),
-  monitoring: icon('ic-analytics'),
-  sales: icon('ic-ecommerce'),
-  demoItem: icon('ic-menu-item'),
-  demoOrder: icon('ic-order'),
 };
 
 // ----------------------------------------------------------------------
@@ -79,41 +74,6 @@ export function useNavData(): NavSectionProps['data'] {
             path: paths.dashboard.root,
             icon: ICONS.home,
           },
-          {
-            title: t('dashboards.finance'),
-            path: paths.dashboard.dashboards.finance,
-            icon: ICONS.finance,
-          },
-          {
-            title: t('dashboards.monitoring'),
-            path: paths.dashboard.dashboards.monitoring,
-            icon: ICONS.monitoring,
-          },
-          {
-            title: t('dashboards.sales'),
-            path: paths.dashboard.dashboards.sales,
-            icon: ICONS.sales,
-          },
-        ],
-      },
-      {
-        subheader: t('demo.root'),
-        items: [
-          {
-            title: t('demo.item'),
-            path: paths.dashboard.demo.item,
-            icon: ICONS.demoItem,
-          },
-          {
-            title: t('demo.itemEmpty'),
-            path: paths.dashboard.demo.itemEmpty,
-            icon: ICONS.demoItem,
-          },
-          {
-            title: t('demo.order'),
-            path: paths.dashboard.demo.order,
-            icon: ICONS.demoOrder,
-          },
         ],
       },
     ];
@@ -124,3 +84,4 @@ export function useNavData(): NavSectionProps['data'] {
       .filter((section) => section.items.length > 0);
   }, [t, can, canAny]);
 }
+

@@ -24,12 +24,8 @@ import { MotionDialog } from 'src/shared/ui/animate';
 import { Form, Field } from 'src/shared/ui/hook-form';
 import { ErrorDialog } from 'src/shared/ui/error-dialog';
 import { useRoles } from 'src/module/core/features/roles/hooks/use-roles';
-import { useCompanies } from 'src/module/core/features/auth/hooks/use-companies';
-import { useBranchesByCompanies } from 'src/module/core/features/branches/hooks/use-branches-by-companies';
 
 import { createUser, updateUser } from '../api';
-import { CompanyAccessSection } from './company-access-section';
-import { BranchScopingSection } from './branch-scoping-section';
 
 // ----------------------------------------------------------------------
 
@@ -76,36 +72,11 @@ export function UserFormDialog({ open, mode, seed, onClose, onSaved }: Props) {
   const schema = useMemo(() => makeSchema(t, isEditing), [t, isEditing]);
 
   const rolesQuery = useRoles();
-  const { companies: companiesAll } = useCompanies();
 
   const submitting = useBoolean();
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [companiesError, setCompaniesError] = useState<string | null>(null);
 
   const initialValue = seed ?? null;
-
-  const [checkedCompanies, setCheckedCompanies] = useState<Set<string>>(new Set());
-  const [checkedBranches, setCheckedBranches] = useState<Set<string>>(new Set());
-
-  const companyIdsParam = useMemo(() => Array.from(checkedCompanies), [checkedCompanies]);
-  const branchesQuery = useBranchesByCompanies(companyIdsParam);
-
-  const ownedCompanyIds = useMemo(() => {
-    if (!initialValue?.companies) return new Set<string>();
-    return new Set(initialValue.companies.filter((c) => c.is_owner).map((c) => c.company_id));
-  }, [initialValue]);
-
-  const companyNameById = useMemo(() => {
-    const map = new Map<string, string>();
-    for (const c of companiesAll) map.set(c.id, c.name);
-    return map;
-  }, [companiesAll]);
-
-  const branchToCompanyId = useMemo(() => {
-    const map = new Map<string, string>();
-    for (const b of branchesQuery.data) map.set(b.id, b.company_id);
-    return map;
-  }, [branchesQuery.data]);
 
   const defaultValues: FormValues = useMemo(
     () => ({
@@ -129,58 +100,12 @@ export function UserFormDialog({ open, mode, seed, onClose, onSaved }: Props) {
   useEffect(() => {
     if (!open) {
       setErrorMsg(null);
-      setCompaniesError(null);
       return;
     }
     methods.reset(defaultValues);
-
-    const initialCompanies = new Set(initialValue?.companies?.map((c) => c.company_id) ?? []);
-    const initialBranches = new Set(initialValue?.branches?.map((b) => b.branch_id) ?? []);
-    setCheckedCompanies(initialCompanies);
-    setCheckedBranches(initialBranches);
-  }, [open, defaultValues, methods, initialValue]);
-
-  const handleToggleCompany = (id: string) => {
-    if (ownedCompanyIds.has(id)) return;
-
-    setCheckedCompanies((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-
-      // Cascade: drop branches whose parent company is no longer checked.
-      setCheckedBranches((prevBranches) => {
-        const nextBranches = new Set<string>();
-        for (const branchId of prevBranches) {
-          const companyId = branchToCompanyId.get(branchId);
-          if (companyId && next.has(companyId)) nextBranches.add(branchId);
-        }
-        return nextBranches;
-      });
-
-      return next;
-    });
-  };
-
-  const handleToggleBranch = (id: string) => {
-    setCheckedBranches((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  };
-
-  if (companiesError && checkedCompanies.size > 0) {
-    setCompaniesError(null);
-  }
+  }, [open, defaultValues, methods]);
 
   const onSave = handleSubmit(async (values) => {
-    if (checkedCompanies.size === 0) {
-      setCompaniesError(t('form.companyRequired'));
-      return;
-    }
-    setCompaniesError(null);
     setErrorMsg(null);
     submitting.onTrue();
     try {
@@ -193,8 +118,6 @@ export function UserFormDialog({ open, mode, seed, onClose, onSaved }: Props) {
           phone: values.phone || undefined,
           is_active: values.is_active,
           role_id: values.role_id || undefined,
-          company_ids: Array.from(checkedCompanies),
-          branch_ids: Array.from(checkedBranches),
         };
         saved = await updateUser(initialValue.id, payload);
       } else {
@@ -205,8 +128,6 @@ export function UserFormDialog({ open, mode, seed, onClose, onSaved }: Props) {
           full_name: values.full_name || undefined,
           phone: values.phone || undefined,
           role_id: values.role_id || undefined,
-          company_ids: Array.from(checkedCompanies),
-          branch_ids: Array.from(checkedBranches),
         };
         saved = await createUser(payload);
       }
@@ -263,22 +184,6 @@ export function UserFormDialog({ open, mode, seed, onClose, onSaved }: Props) {
                 )}
               </Box>
 
-              <CompanyAccessSection
-                companies={companiesAll}
-                checked={checkedCompanies}
-                ownedCompanyIds={ownedCompanyIds}
-                onToggle={handleToggleCompany}
-                error={companiesError}
-              />
-
-              <BranchScopingSection
-                branches={branchesQuery.data}
-                companyNameById={companyNameById}
-                checkedCompanies={checkedCompanies}
-                checkedBranches={checkedBranches}
-                onToggleBranch={handleToggleBranch}
-              />
-
               {isEditing && (
                 <FormControlLabel
                   control={
@@ -309,3 +214,4 @@ export function UserFormDialog({ open, mode, seed, onClose, onSaved }: Props) {
     </>
   );
 }
+

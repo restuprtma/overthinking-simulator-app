@@ -70,12 +70,6 @@ export function UserTableRow({ row, onView, onEdit, onDelete }: Props) {
         </TableCell>
 
         <TableCell>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {row.branches?.length ?? 0}
-          </Typography>
-        </TableCell>
-
-        <TableCell>
           <Label color={row.is_active ? 'success' : 'default'} variant="soft">
             {row.is_active ? t('statuses.active') : t('statuses.inactive')}
           </Label>
