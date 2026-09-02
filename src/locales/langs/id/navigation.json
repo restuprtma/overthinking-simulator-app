@@ -1,6 +1,7 @@
 {
   "home": "Beranda",
   "simulator": "Simulator",
+  "history": "Riwayat Refleksi",
   "dashboards": {
     "finance": "Keuangan",
     "monitoring": "Monitoring",
@@ -9,9 +10,9 @@
   "settings": {
     "root": "Pengaturan",
     "branches": "Cabang",
-    "roles": "Roles",
+    "roles": "Peran",
     "users": "Pengguna",
-    "credentials": "Kredensial Gemini",
+    "credentials": "API Key Groq",
     "translationOverride": "Kustomisasi Istilah"
   },
   "demo": {

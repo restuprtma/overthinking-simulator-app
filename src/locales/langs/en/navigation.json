@@ -1,6 +1,7 @@
 {
   "home": "Home",
   "simulator": "Simulator",
+  "history": "Reflection History",
   "dashboards": {
     "finance": "Finance",
     "monitoring": "Monitoring",
@@ -11,7 +12,7 @@
     "branches": "Branches",
     "roles": "Roles",
     "users": "Users",
-    "credentials": "Gemini Credentials",
+    "credentials": "Groq API Keys",
     "translationOverride": "Term Customization"
   },
   "demo": {
