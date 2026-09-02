@@ -77,6 +77,27 @@ export type PaletteExtend = {
   };
 };
 
+// Persona color roles (one debate speaker)
+type PersonaColor = {
+  surface: string;
+  ink: string;
+  edge: string;
+  accent: string;
+};
+
+// Persona color roles including the channels appended by `createPaletteChannel`
+type PersonaColorWithChannels = PersonaColor & {
+  [K in keyof PersonaColor as `${K}Channel`]: string;
+};
+
+// Extended persona palette
+export type PersonaPaletteExtend = {
+  persona: {
+    cemas: PersonaColorWithChannels;
+    realistis: PersonaColorWithChannels;
+  };
+};
+
 /**
  * ➤
  * ➤ ➤ Core palette (primary, secondary, info, success, warning, error, common, grey)
@@ -97,8 +118,8 @@ export const grey = createPaletteChannel(themeConfig.palette.grey);
  * ➤
  */
 export const text = {
-  light: createPaletteChannel({ primary: '#4C1D95', secondary: '#475569', disabled: grey[400] }),
-  dark: createPaletteChannel({ primary: '#4C1D95', secondary: '#475569', disabled: grey[400] }),
+  light: createPaletteChannel({ primary: '#334155', secondary: '#475569', disabled: grey[500] }),
+  dark: createPaletteChannel({ primary: '#334155', secondary: '#475569', disabled: grey[500] }),
 };
 
 export const background = {
@@ -128,10 +149,32 @@ export const action = (mode: 'light' | 'dark'): Partial<TypeAction> => ({
 export const extendPalette: PaletteExtend = {
   shared: {
     inputUnderline: varAlpha(grey['500Channel'], opacity.inputUnderline),
-    inputOutlined: varAlpha(grey['500Channel'], 0.2),
+    inputOutlined: varAlpha(grey['600Channel'], 0.76),
     paperOutlined: varAlpha(grey['500Channel'], 0.16),
     buttonOutlined: varAlpha(grey['500Channel'], 0.32),
   },
+};
+
+/**
+ * ➤
+ * ➤ ➤ Persona palette (the two debate voices)
+ * ➤
+ * `cemas` is the user's own anxious thought — violet, never red/error-colored.
+ * `realistis` is the voice pointing toward action — it shares the wellness-green CTA hue.
+ */
+export const persona = {
+  cemas: createPaletteChannel({
+    surface: '#F5F3FF',
+    ink: '#5B21B6',
+    edge: '#DDD6FE',
+    accent: '#7C3AED',
+  }),
+  realistis: createPaletteChannel({
+    surface: '#ECFDF5',
+    ink: '#065F46',
+    edge: '#A7F3D0',
+    accent: '#047857',
+  }),
 };
 
 /**
@@ -148,9 +191,10 @@ const basePalette: ColorSystemOptions['palette'] = {
   error,
   common,
   grey,
-  divider: '#EDE9FE',
-  TableCell: { border: '#EDE9FE' },
+  divider: grey[300],
+  TableCell: { border: grey[300] },
   ...extendPalette,
+  persona,
 };
 
 /* **********************************************************************

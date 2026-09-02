@@ -38,8 +38,8 @@ export const themeConfig: ThemeConfig = {
    * Typography
    *************************************** */
   fontFamily: {
-    primary: 'Raleway',
-    secondary: 'Lora',
+    primary: 'Poppins',
+    secondary: 'Poppins',
   },
   /** **************************************
    * Palette
@@ -47,8 +47,8 @@ export const themeConfig: ThemeConfig = {
   palette: {
     primary: {
       lighter: '#EDE9FE',
-      light: '#C4B5FD',
-      main: '#8B5CF6',
+      light: '#8B5CF6',
+      main: '#7C3AED',
       dark: '#6D28D9',
       darker: '#4C1D95',
       contrastText: '#FFFFFF',
@@ -62,19 +62,19 @@ export const themeConfig: ThemeConfig = {
       contrastText: '#0F172A',
     },
     info: {
-      lighter: '#EDE9FE',
-      light: '#C4B5FD',
-      main: '#8B5CF6',
-      dark: '#6D28D9',
-      darker: '#4C1D95',
+      lighter: '#CFFAFE',
+      light: '#67E8F9',
+      main: '#0E7490',
+      dark: '#155E75',
+      darker: '#164E63',
       contrastText: '#FFFFFF',
     },
     success: {
       lighter: '#D1FAE5',
       light: '#6EE7B7',
-      main: '#059669',
-      dark: '#047857',
-      darker: '#065F46',
+      main: '#047857',
+      dark: '#065F46',
+      darker: '#064E3B',
       contrastText: '#FFFFFF',
     },
     warning: {
@@ -94,16 +94,16 @@ export const themeConfig: ThemeConfig = {
       contrastText: '#FFFFFF',
     },
     grey: {
-      50: '#FAF5FF',
-      100: '#F5F0FF',
-      200: '#EDE9FE',
-      300: '#E2D9FD',
-      400: '#C4B5FD',
-      500: '#A78BFA',
-      600: '#8B5CF6',
-      700: '#6D28D9',
-      800: '#4C1D95',
-      900: '#3B157A',
+      50: '#FAF7FF',
+      100: '#F3F1FA',
+      200: '#E7E9F1',
+      300: '#D2D7E2',
+      400: '#A6AFC0',
+      500: '#7E8CA0',
+      600: '#5B6A80',
+      700: '#475569',
+      800: '#334155',
+      900: '#1E293B',
     },
     common: {
       black: '#000000',

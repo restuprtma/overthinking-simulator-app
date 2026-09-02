@@ -4,13 +4,7 @@ import { primary, secondary } from '../core/palette';
 
 // ----------------------------------------------------------------------
 
-export type ThemeColorPreset =
-  | 'default'
-  | 'preset1'
-  | 'preset2'
-  | 'preset3'
-  | 'preset4'
-  | 'preset5';
+export type ThemeColorPreset = 'default' | 'preset1' | 'preset2';
 
 export const primaryColorPresets: Record<ThemeColorPreset, PaletteColorNoChannels> = {
   default: {
@@ -21,44 +15,22 @@ export const primaryColorPresets: Record<ThemeColorPreset, PaletteColorNoChannel
     darker: primary.darker,
     contrastText: primary.contrastText,
   },
+  // Indigo
   preset1: {
-    lighter: '#CCF4FE',
-    light: '#68CDF9',
-    main: '#078DEE',
-    dark: '#0351AB',
-    darker: '#012972',
+    lighter: '#E0E7FF',
+    light: '#A5B4FC',
+    main: '#4F46E5',
+    dark: '#4338CA',
+    darker: '#312E81',
     contrastText: '#FFFFFF',
   },
+  // Deep blue
   preset2: {
-    lighter: '#EBD6FD',
-    light: '#B985F4',
-    main: '#7635dc',
-    dark: '#431A9E',
-    darker: '#200A69',
-    contrastText: '#FFFFFF',
-  },
-  preset3: {
-    lighter: '#CDE9FD',
-    light: '#6BB1F8',
-    main: '#0C68E9',
-    dark: '#063BA7',
-    darker: '#021D6F',
-    contrastText: '#FFFFFF',
-  },
-  preset4: {
-    lighter: '#FEF4D4',
-    light: '#FED680',
-    main: '#fda92d',
-    dark: '#B66816',
-    darker: '#793908',
-    contrastText: '#1C252E',
-  },
-  preset5: {
-    lighter: '#FFE3D5',
-    light: '#FFC1AC',
-    main: '#FF3030',
-    dark: '#B71833',
-    darker: '#7A0930',
+    lighter: '#DBEAFE',
+    light: '#93C5FD',
+    main: '#1D4ED8',
+    dark: '#1E40AF',
+    darker: '#1E3A8A',
     contrastText: '#FFFFFF',
   },
 };
@@ -72,44 +44,22 @@ export const secondaryColorPresets: Record<ThemeColorPreset, PaletteColorNoChann
     darker: secondary.darker,
     contrastText: secondary.contrastText,
   },
+  // Indigo — soft tints to pair with `preset1`
   preset1: {
-    lighter: '#CAFDEB',
-    light: '#61F4D9',
-    main: '#00DCDA',
-    dark: '#00849E',
-    darker: '#004569',
-    contrastText: '#FFFFFF',
+    lighter: '#EEF2FF',
+    light: '#E0E7FF',
+    main: '#C7D2FE',
+    dark: '#A5B4FC',
+    darker: '#818CF8',
+    contrastText: '#0F172A',
   },
+  // Deep blue — soft tints to pair with `preset2`
   preset2: {
-    lighter: '#D6E5FD',
-    light: '#85A9F3',
-    main: '#3562D7',
-    dark: '#1A369A',
-    darker: '#0A1967',
-    contrastText: '#FFFFFF',
-  },
-  preset3: {
-    lighter: '#FFF3D8',
-    light: '#FFD18B',
-    main: '#FFA03F',
-    dark: '#B75D1F',
-    darker: '#7A2D0C',
-    contrastText: '#1C252E',
-  },
-  preset4: {
-    lighter: '#FEEFD5',
-    light: '#FBC182',
-    main: '#F37F31',
-    dark: '#AE4318',
-    darker: '#741B09',
-    contrastText: '#FFFFFF',
-  },
-  preset5: {
-    lighter: '#FCF0DA',
-    light: '#EEC18D',
-    main: '#C87941',
-    dark: '#904220',
-    darker: '#601B0C',
-    contrastText: '#FFFFFF',
+    lighter: '#EFF6FF',
+    light: '#DBEAFE',
+    main: '#BFDBFE',
+    dark: '#93C5FD',
+    darker: '#60A5FA',
+    contrastText: '#0F172A',
   },
 };

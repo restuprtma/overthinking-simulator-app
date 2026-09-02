@@ -1,4 +1,4 @@
-import type { GeminiCredential } from '../types';
+import type { GroqCredential } from '../types';
 
 import { useState, useEffect, useCallback } from 'react';
 
@@ -17,16 +17,16 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useTranslate } from 'src/locales';
 import { Iconify } from 'src/shared/ui/iconify';
 
-import { getGeminiCredentials, updateGeminiCredentials } from '../api';
+import { getGroqCredentials, updateGroqCredentials } from '../api';
 
 // ----------------------------------------------------------------------
 
-const emptyRow = (): GeminiCredential => ({ key: '', model: '' });
+const emptyRow = (): GroqCredential => ({ key: '', model: '' });
 
 export function CredentialsSettings() {
   const { t } = useTranslate('settings');
 
-  const [rows, setRows] = useState<GeminiCredential[]>([]);
+  const [rows, setRows] = useState<GroqCredential[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,7 +36,7 @@ export function CredentialsSettings() {
     setLoading(true);
     setError(null);
     try {
-      const creds = await getGeminiCredentials();
+      const creds = await getGroqCredentials();
       setRows(creds.length > 0 ? creds : []);
     } catch (err) {
       setError(err instanceof Error ? err.message : t('errorGeneric'));
@@ -49,9 +49,12 @@ export function CredentialsSettings() {
     fetchRows();
   }, [fetchRows]);
 
-  const handleChangeRow = useCallback((index: number, field: keyof GeminiCredential, value: string) => {
-    setRows((prev) => prev.map((row, i) => (i === index ? { ...row, [field]: value } : row)));
-  }, []);
+  const handleChangeRow = useCallback(
+    (index: number, field: keyof GroqCredential, value: string) => {
+      setRows((prev) => prev.map((row, i) => (i === index ? { ...row, [field]: value } : row)));
+    },
+    []
+  );
 
   const handleAddRow = useCallback(() => {
     setRows((prev) => [...prev, emptyRow()]);
@@ -65,7 +68,7 @@ export function CredentialsSettings() {
     setSaving(true);
     setError(null);
     try {
-      await updateGeminiCredentials(rows);
+      await updateGroqCredentials(rows);
       setSuccessOpen(true);
       await fetchRows();
     } catch (err) {
@@ -206,7 +209,11 @@ export function CredentialsSettings() {
               disabled={saving}
               onClick={handleSave}
               startIcon={<Iconify icon="solar:settings-bold" />}
-              sx={{ minHeight: 48, width: { xs: '100%', md: 'auto' }, alignSelf: { md: 'flex-end' } }}
+              sx={{
+                minHeight: 48,
+                width: { xs: '100%', md: 'auto' },
+                alignSelf: { md: 'flex-end' },
+              }}
             >
               {saving ? (
                 <>
@@ -227,7 +234,12 @@ export function CredentialsSettings() {
         onClose={handleCloseSuccess}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-        <Alert severity="success" variant="filled" sx={{ width: '100%' }} onClose={handleCloseSuccess}>
+        <Alert
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+          onClose={handleCloseSuccess}
+        >
           {t('saved')}
         </Alert>
       </Snackbar>

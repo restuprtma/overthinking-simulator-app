@@ -1,11 +1,11 @@
 {
   "title": "Settings",
-  "credentialsTitle": "Gemini Credentials Settings",
+  "credentialsTitle": "Groq Credentials Settings",
   "credentialsDescription": "Backup key + model list. The system tries them in order when a limit is hit.",
   "keyLabel": "API Key",
   "modelLabel": "Model",
   "keyPlaceholder": "Paste API key",
-  "modelPlaceholder": "e.g. gemini-2.5-flash",
+  "modelPlaceholder": "e.g. openai/gpt-oss-120b",
   "addRow": "Add row",
   "remove": "Remove",
   "save": "Save",

@@ -74,17 +74,17 @@ export const typography: TypographyVariantsOptions = {
   ...baseTypography,
   h1: {
     fontFamily: secondaryFont,
-    fontWeight: baseTypography.fontWeightExtraBold,
+    fontWeight: baseTypography.fontWeightBold,
     lineHeight: 80 / 64,
-    fontSize: pxToRem(40),
-    ...responsiveFontSizes({ sm: 52, md: 58, lg: 64 }),
+    fontSize: pxToRem(36),
+    ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),
   },
   h2: {
     fontFamily: secondaryFont,
-    fontWeight: baseTypography.fontWeightExtraBold,
+    fontWeight: baseTypography.fontWeightBold,
     lineHeight: 64 / 48,
-    fontSize: pxToRem(32),
-    ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),
+    fontSize: pxToRem(28),
+    ...responsiveFontSizes({ sm: 32, md: 36, lg: 40 }),
   },
   h3: {
     fontFamily: secondaryFont,
@@ -125,7 +125,7 @@ export const typography: TypographyVariantsOptions = {
     fontSize: pxToRem(14),
   },
   body1: {
-    lineHeight: 1.5,
+    lineHeight: 1.65,
     fontSize: pxToRem(16),
   },
   body2: {

@@ -1,5 +1,7 @@
 export * from './mixins';
 
+export * from './motion';
+
 export * from './shadows';
 
 export * from './palette';

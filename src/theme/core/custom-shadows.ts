@@ -47,8 +47,8 @@ function createCustomShadows(colorChannel: string): CustomShadows {
     z24: `0 24px 48px 0 ${varAlpha(colorChannel, 0.16)}`,
     /********/
     dialog: `-40px 40px 80px -8px ${varAlpha(common.blackChannel, 0.24)}`,
-    card: `-5px -5px 15px 0 ${varAlpha('#FFFFFF', 0.9)}, 5px 5px 15px 0 ${varAlpha(colorChannel, 0.16)}`,
-    dropdown: `-5px -5px 15px 0 ${varAlpha('#FFFFFF', 0.9)}, 5px 5px 15px 0 ${varAlpha(colorChannel, 0.2)}`,
+    card: `-5px -5px 15px 0 ${varAlpha(common.whiteChannel, 0.9)}, 5px 5px 15px 0 ${varAlpha(colorChannel, 0.16)}`,
+    dropdown: `-5px -5px 15px 0 ${varAlpha(common.whiteChannel, 0.9)}, 5px 5px 15px 0 ${varAlpha(colorChannel, 0.2)}`,
     /********/
     primary: createShadowColor(primary.mainChannel),
     secondary: createShadowColor(secondary.mainChannel),

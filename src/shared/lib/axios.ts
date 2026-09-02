@@ -144,7 +144,7 @@ export const endpoints = {
     byId: (id: string) => `/core/v1/reflections/${id}`,
   },
   settings: {
-    geminiCredentials: '/core/v1/settings/gemini-credentials',
+    groqCredentials: '/core/v1/settings/groq-credentials',
   },
 } as const;
 

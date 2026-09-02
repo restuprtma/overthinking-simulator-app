@@ -5,6 +5,7 @@ import type {} from '@mui/x-date-pickers/themeAugmentation';
 import type {} from '@mui/material/themeCssVarsAugmentation';
 import type { DeepPartial } from './types';
 import type { MixinsExtend } from './core/mixins';
+import type { MotionTokens } from './core/motion';
 import type { OpacityExtend } from './core/opacity';
 import type { CustomShadows } from './core/custom-shadows';
 import type { RatingExtendSize } from './core/components/rating';
@@ -33,6 +34,7 @@ import type {
   CommonColorsExtend,
   PaletteColorExtend,
   TypeBackgroundExtend,
+  PersonaPaletteExtend,
 } from './core/palette';
 
 // ----------------------------------------------------------------------
@@ -56,8 +58,10 @@ declare module '@mui/material/styles' {
   interface TypeBackground extends TypeBackgroundExtend {}
 
   // extend palette
-  interface Palette extends PaletteExtend {}
-  interface PaletteOptions extends DeepPartial<PaletteExtend> {}
+  interface Palette extends PaletteExtend, PersonaPaletteExtend {}
+  interface PaletteOptions
+    extends DeepPartial<PaletteExtend>,
+      DeepPartial<PersonaPaletteExtend> {}
 
   /**
    * ➤➤ Typography (https://mui.com/customization/typography/)
@@ -94,6 +98,20 @@ declare module '@mui/material/styles' {
   }
   interface ThemeVars {
     customShadows: CustomShadows;
+  }
+
+  /**
+   * Not registered on `ThemeVars`: motion is not a CSS-variable token, so it
+   * never exists on `theme.vars`. Consumers must read `theme.motion`.
+   *
+   * ➤➤ Motion
+   * @from {@link file://./core/motion.ts}
+   */
+  interface Theme {
+    motion: MotionTokens;
+  }
+  interface ThemeOptions {
+    motion?: MotionTokens;
   }
 }
 

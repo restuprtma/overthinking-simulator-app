@@ -1,11 +1,11 @@
 {
   "title": "Pengaturan",
-  "credentialsTitle": "Pengaturan Kredensial Gemini",
+  "credentialsTitle": "Pengaturan Kredensial Groq",
   "credentialsDescription": "Daftar key + model cadangan. Sistem mencoba berurutan saat kena limit.",
   "keyLabel": "API Key",
   "modelLabel": "Model",
   "keyPlaceholder": "Tempel API key",
-  "modelPlaceholder": "contoh: gemini-2.5-flash",
+  "modelPlaceholder": "contoh: openai/gpt-oss-120b",
   "addRow": "Tambah baris",
   "remove": "Hapus",
   "save": "Simpan",

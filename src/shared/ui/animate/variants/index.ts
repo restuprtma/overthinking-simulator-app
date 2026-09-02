@@ -10,6 +10,8 @@ export * from './slide';
 
 export * from './scale';
 
+export * from './reveal';
+
 export * from './bounce';
 
 export * from './rotate';

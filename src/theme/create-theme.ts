@@ -9,6 +9,7 @@ import { opacity } from './core/opacity';
 import { shadows } from './core/shadows';
 import { palette } from './core/palette';
 import { themeConfig } from './theme-config';
+import { motionTokens } from './core/motion';
 import { components } from './core/components';
 import { typography } from './core/typography';
 import { customShadows } from './core/custom-shadows';
@@ -28,6 +29,7 @@ export const baseTheme: ThemeOptions = {
   mixins,
   components,
   typography,
+  motion: motionTokens,
   shape: { borderRadius: 12 },
   direction: themeConfig.direction,
   cssVariables: themeConfig.cssVariables,

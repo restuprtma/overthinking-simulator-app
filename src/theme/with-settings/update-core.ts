@@ -32,8 +32,16 @@ export function applySettingsToTheme(
 
   const lightPalette = theme.colorSchemes?.light?.palette as ColorSystem['palette'];
 
-  const primaryColorPalette = createPaletteChannel(primaryColorPresets[primaryColor]);
-  // const secondaryColorPalette = createPaletteChannel(secondaryColorPresets[primaryColor]);
+  /**
+   * Fall back to `default` when the stored preset key no longer exists
+   * (e.g. a `localStorage` value from a removed preset).
+   */
+  const primaryColorPreset = primaryColorPresets[primaryColor] ?? primaryColorPresets.default;
+
+  const primaryColorPalette = createPaletteChannel(primaryColorPreset);
+  // const secondaryColorPalette = createPaletteChannel(
+  //   secondaryColorPresets[primaryColor] ?? secondaryColorPresets.default
+  // );
 
   const updateColorScheme = (schemeName: ThemeColorScheme) => {
     const currentScheme: ColorSchemeOptionsExtended = theme.colorSchemes?.[schemeName] ?? {};

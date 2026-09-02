@@ -1,4 +1,4 @@
-import type { Reflection, GeminiCredential, ReflectionSummary } from '../types';
+import type { Reflection, GroqCredential, ContinueRequest, ContinueResponse, ReflectionSummary } from '../types';
 
 import axios, { endpoints } from 'src/shared/lib/axios';
 
@@ -49,14 +49,31 @@ export async function getReflection(id: string): Promise<Reflection> {
   return res.data.data;
 }
 
-export async function getGeminiCredentials(): Promise<GeminiCredential[]> {
+export async function getGroqCredentials(): Promise<GroqCredential[]> {
   const res = await axios.get<{
-    data: { credentials: GeminiCredential[] } | null;
+    data: { credentials: GroqCredential[] } | null;
     message: string;
-  }>(endpoints.settings.geminiCredentials);
+  }>(endpoints.settings.groqCredentials);
   return res.data.data?.credentials ?? [];
 }
 
-export async function updateGeminiCredentials(credentials: GeminiCredential[]): Promise<void> {
-  await axios.put(endpoints.settings.geminiCredentials, { credentials });
+export async function updateGroqCredentials(credentials: GroqCredential[]): Promise<void> {
+  await axios.put(endpoints.settings.groqCredentials, { credentials });
+}
+
+// NEW FUNCTION FOR INTERACTIVE CHAT
+export async function continueReflection(
+  reflectionId: string,
+  payload: ContinueRequest
+): Promise<ContinueResponse> {
+  const res = await axios.post<{ data: ContinueResponse | null; message: string }>(
+    `${endpoints.reflections.byId(reflectionId)}/continue`,
+    payload
+  );
+
+  if (!res.data.data) {
+    throw new Error(res.data.message || 'Failed to continue conversation');
+  }
+
+  return res.data.data;
 }
